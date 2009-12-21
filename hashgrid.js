@@ -1,8 +1,7 @@
 /**
  * Overlay tool (jQuery version)
- * 
+ * http://github.com/dotjay/hashgrid
  * Version 1, 21 Dec 2009
- * 
  * By Jon Gibbins, accessibility.co.uk
  */
 
@@ -15,10 +14,6 @@ $(document).ready(function() {
 
 /**
  * Grid overlay
- * 
- * Version 1, 21 Dec 2009
- * 
- * By Jon Gibbins, accessibility.co.uk
  */
 var GridOverlay = function(id) {
 
