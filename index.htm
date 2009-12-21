@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>#grid</title>
+
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+}
+body{
+font-size: 100%;
+line-height: 1.25;
+font-family: 'American Typewriter', AmericanTypewriter, Georgia, serif;
+background: #d8dcce;
+color: #321e1e;
+margin: 0;
+padding: 0 20px;
+}
+html>body{
+font-size: 16px;
+}
+
+#content,
+#footer{
+width: 980px;
+margin: 0 auto;
+}
+#wrap{
+width: 620px;
+margin-left: 320px;
+}
+#footer{
+border-top: 1px solid #444;
+padding-top: 1em;
+}
+h1, h2{
+font-weight: normal;
+color: #be3c14;
+text-shadow:0 1px 1px #F8FCEE;
+}
+h1{
+font-size: 36px;
+line-height: 1.111;
+margin: 40px 20px 20px;
+}
+h2{
+font-size: 16px;
+line-height: 1.25;
+text-transform: uppercase;
+letter-spacing: 2px;
+margin: 0 20px 20px;
+}
+a:link,
+a:visited{
+color: #5a3232;
+text-decoration: none;
+border-bottom: 1px solid #fff;
+}
+a:focus,
+a:hover,
+a:active{
+background: rgba(255,255,255,0.5);
+border-bottom: 1px solid #fff;
+}
+p, ul{
+margin: 0 20px 20px;
+text-shadow:0 1px 1px #F8FCEE;
+}
+dl, ol{
+margin: 0 20px;
+text-shadow:0 1px 1px #F8FCEE;
+}
+ul{
+list-style: circle;
+}
+ol li{
+margin-bottom: 20px;
+}
+dd{
+margin-bottom: 20px;
+}
+ol textarea{
+font-family: 'Courier New', monospace;
+font-size: 14px;  
+line-height: 1.429;
+display: block;
+width: 578px;
+margin: 18px 0;
+padding: 20px;
+border: 1px solid #aaa;
+}
+#html{
+height: 160px;
+}
+#css{
+height: 500px;
+}
+span.key{
+color: #2b3c45;
+text-transform: uppercase;
+}
+</style>
+
+<!-- Set styles -->
+<style type="text/css">
+
+/**
+ * Grid overlay
+ */
+#grid{
+
+    /* Vertical grid lines */
+    background: url(bg-grid-980.gif) repeat-y 0 0;
+
+    /* Dimensions - same width as your grid with gutters */
+    width: 980px;
+
+    /* Overlay (left-aligned)
+    position: absolute;
+    top: 0;
+    left: 0;
+    */
+
+    /* Overlay (centered) */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -490px;
+
+}
+
+/**
+ * Horizontal grid lines, defined by your base line height
+ *
+ * Remember, the CSS properties that define the box model:
+ * visible height = height + borders + margins + padding
+ */
+#grid .horiz{
+
+    /* 24px line height */
+    height: 19px;
+    border-bottom: 1px dotted #aaa;
+    margin: 0;
+    padding: 0;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="content" role="main">
+
+<div id="wrap">
+
+<h1>#grid</h1>
+
+<p>This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to fix it in place, and toggle between displaying it in the foreground or background. To see it in action, <a href="http://analog.coop/">go to Analog</a>, and hit <span class="key">ALT</span> + <span class="key">G</span>.</p>
+
+<p><a href="http://jontangerine.com/silo/typography/grid/">Latest download</a></p>
+
+<p>Version 1: <a href="http://jontangerine.com/silo/typography/grid/">Download</a></p>
+
+
+<h2 id="features">Features</h2>
+<ul>
+<li>Adaptable for all layout widths and alignments (this version assumes a 980px wide container including 20px gutters)</li>
+<li>Adaptable for any vertical rhythm value (this version assumes one lead of 20px)</li>
+<li>Show and hide, fix in place, or toggle foreground and background display using keyboard shortcuts</li>
+
+<li>Uses: A single JavaScript file, a few lines of CSS, and one image (for the vertical lines)</li>
+</ul>
+
+
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Copy the <a href="overlay.js">overlay.js</a> script to your project.</li>
+<li>Add the script to your page(s) just inside the <code>&#60;/body&#62;</code> tag.
+    <textarea id="html" cols="110" rows="5">
+&#60;!-- Grab latest version of jQuery --&#62;
+&#60;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"&#62;&#60;/script&#62;
+
+&#60;!-- Include the hashgrid script --&#62;
+&#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
+
+</textarea></li>
+<li>Add the CSS to your page(s).
+    <textarea id="css" cols="110" rows="20">
+/**
+ * Grid overlay
+ */
+#grid{
+
+    /* Vertical grid lines */
+    background: url(bg-grid-980.gif) repeat-y 0 0;
+
+    /* Dimensions - same width as your grid with gutters */
+    width: 980px;
+
+    /* Overlay (left-aligned)
+    position: absolute;
+    top: 0;
+    left: 0;
+    */
+
+    /* Overlay (centered) */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -490px;
+
+}
+
+/**
+ * Horizontal grid lines, defined by your base line height
+ *
+ * Remember, the CSS properties that define the box model:
+ * visible height = height + borders + margins + padding
+ */
+#grid .horiz{
+
+    /* 24px line height */
+    height: 19px;
+    border-bottom: 1px dotted #aaa;
+    margin: 0;
+    padding: 0;
+
+}
+</textarea></li>
+<li>Modify the CSS to suit your needs&#8201;&#8212;&#8201;it&#8217;s  annotated to help you. We&#8217;ve included a <a href="bg-grid-980.gif">980-pixel-wide background image</a> to provide the vertical grid lines (a 940-pixel-wide content area with 20px gutters). If you&#8217;re working to a <a href="http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-designing-grid-systems-part-1">different grid</a>, you will need to create a new image for your guides. Don&#8217;t forget to make the background transparent!</li>
+</ol>
+
+
+<h2 id="usage">Usage</h2>
+<p>Note: The document must have keyboard focus for the overlay to work, so click on the document background or <span class="key">tab</span> into the page.</p>
+<dl>
+<dt><span class="key">ALT</span> + <span class="key">G</span></dt>
+<dd>Overlay the grid until you release.</dd>
+
+<dt><span class="key">ALT</span> + <span class="key">G</span> + <span class="key">ENTER</span></dt>
+<dd>Make the grid overlay stick on; <span class="key">ALT</span> + <span class="key">G</span> will remove it again.</dd>
+<dt><span class="key">ALT</span> + <span class="key">B</span> (while grid is sticky)</dt>
+
+<dd>Toggle the grid overlay to the front/back.</dd>
+</dl>
+<p>Note: A cookie conveniently remembers the state of the overlay when you refresh the page. While the grid is in front, you will not be able to interact with the page.</p>
+
+
+<h2 id="known-issues">Known Issues</h2>
+<ul>
+<li>IE 8: Fully functional, but <span class="key">ALT</span> + <span class="key">G</span> + <span class="key">ENTER</span> will put IE into full screen mode. Hit <span class="key">ALT</span> + <span class="key">ENTER</span> to toggle full screen mode off again.</li>
+
+<li>IE 6: The overlay is always in the foreground.</li>
+<li>Opera 9/10: Currently not working due to different key handling.</li>
+</ul>
+
+</div>
+</div>
+<div id="footer" role="contentinfo">
+<p>#Grid was conceived by <a href="http://jontangerine.com/">Jon Tan</a>, and built by <a href="http://accessibility.co.uk/">Jon Gibbins</a>, in cahoots with our fine friends at <a href="http://analog.coop/">Analog</a>. It is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike License</a>, which essentially means that you&#8217;re free to copy it and adapt it. Contact us at Analog if you need a different license.</p>
+
+</div>
+
+<!-- Grab latest version of jQuery -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<!-- Include the hashgrid script -->
+<script type="text/javascript" src="hashgrid.js"></script>
+
+</body>
+
+</html>
