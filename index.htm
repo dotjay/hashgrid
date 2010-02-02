@@ -42,6 +42,13 @@ margin: 40px 0 20px;
 padding-bottom: 19px;
 border-bottom: 1px dotted DarkGray;
 }
+h1 em{
+font-style: normal;
+color: DarkGray;
+font-size: 16px;
+line-height: 20px;
+margin: 0 0 20px;
+}
 h2, h3{
 font-size: 16px;
 font-weight: 700;
@@ -180,12 +187,12 @@ text-transform: uppercase;
 
 <div id="content" role="main">
 
-<h1>#grid</h1>
+<h1>#grid <em>v2</em></h1>
 
-<p class="summary"><em>Mon, 21 Dec 2009<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to fix it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">ALT</span> + <span class="key">G</span>.</p>
+<p class="summary"><em>Tue, 2 Feb 2010<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to fix it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">ALT</span> + <span class="key">G</span>.</p>
 
 <h2>Download</h2>
-<p id="download"><a href="http://github.com/dotjay/hashgrid/archives/master">Download #grid</a> from <a href="http://github.com/dotjay/hashgrid">GitHub</a></p>
+<p id="download"><a href="http://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="http://github.com/dotjay/hashgrid">GitHub</a></p>
 
 <h2 id="features">Features</h2>
 <ul>
@@ -265,6 +272,14 @@ text-transform: uppercase;
 <dd>Toggle the grid to the front/back.</dd>
 </dl>
 <p><em>N.B. A cookie conveniently remembers the state of the grid when you refresh the page. While the grid is in front, you will not be able to interact with the page.</em></p>
+
+<h2 id="release-notes">Release Notes</h2>
+<dl>
+<dt>v2, 2 Feb 2010</dt>
+<dd>Keys are now more easily configured (see top of hashgrid.js). Renamed the GridOverlay object to hashgrid. Fixed crash when using with disabled CSS.</dd>
+<dt>v1, 21 Dec 2009</dt>
+<dd>First release.</dd>
+</dl>
 
 <h2 id="known-issues">Known Issues</h2>
 <ul>

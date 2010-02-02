@@ -1,36 +1,58 @@
 /**
- * Overlay tool (jQuery version)
+ * hashgrid (jQuery version)
  * http://github.com/dotjay/hashgrid
- * Version 1, 21 Dec 2009
+ * Version 2, 02 Feb 2010
  * By Jon Gibbins, accessibility.co.uk
  */
 
 $(document).ready(function() {
 
-	var grid = new GridOverlay('grid');
+	var grid = new hashgrid({
+		id: 'grid',
+		modifierKey : 'alt',
+		showKey: 'g',
+		stickKey: 'enter',
+		zIndexKey: 'b'
+	});
 
 });
 
 
 /**
- * Grid overlay
+ * hashgrid overlay
  */
-var GridOverlay = function(id) {
+var hashgrid = function(set) {
 
-	var overlayEl = $('<div id="' + id + '"></div>'),
-		overlayGrid = false,
-		overlaySticky = false,
-		cookieName = 'gridoverlay' + id;
+	var overlayOn = false,
+		sticky = false,
+		conf = {
+			id: 'grid',
+			modifierKey: null,
+			showKey: 'g',
+			stickKey: 'enter',
+			zIndexKey: 'b',
+			cookiePrefix: 'hashgrid'
+		};
 
-	// Remove any conflicting overlay in the DOM
-	if ($('#' + id).length > 0) {
-		$('#' + id).remove();
+	// Apply user settings
+	if (typeof set == 'object') {
+		var k;
+		for (k in set) conf[k] = set[k];
+	}
+	else if (typeof set == 'string') {
+		conf.id = set;
 	}
 
-	// Ensure the overlay is hidden before adding to the DOM
-	overlayEl.css('display', 'none');
+	// Remove any conflicting overlay
+	if ($('#' + conf.id).length > 0) {
+		$('#' + conf.id).remove();
+	}
+
+	// Create overlay, hidden before adding to DOM
+	var overlayEl = $('<div></div>');
+	overlayEl.attr('id', conf.id).css('display', 'none');
 	$("body").prepend(overlayEl);
-	var overlay = $('#' + id);
+	var overlay = $('#' + conf.id);
 
 	// Unless a custom z-index is set, ensure the overlay will be behind everything
 	var overlayZ = overlay.css('z-index');
@@ -48,69 +70,118 @@ var GridOverlay = function(id) {
 
 	// Calculate the number of grid lines needed
 	var overlayGridLines = overlay.children('.horiz'),
-	overlayGridLineHeight = parseFloat(overlayGridLines.css('height')) + parseFloat(overlayGridLines.css('border-bottom-width')),
-	numGridLines = Math.floor(pageHeight / overlayGridLineHeight),
-	i;
+		overlayGridLineHeight = parseFloat(overlayGridLines.css('height')) + parseFloat(overlayGridLines.css('border-bottom-width'));
+
+	// Break on zero line height
+	if (overlayGridLineHeight <= 0) return true;
 
 	// Add the remaining grid lines
+	var i, numGridLines = Math.floor(pageHeight / overlayGridLineHeight);
 	for (i = numGridLines - 1; i >= 1; i--) {
-		overlay.append('<div class="horiz">');
-	};
+		overlay.append('<div class="horiz"></div>');
+	}
 
 	// Check for previous overlay state
-	var overlayCookie = readCookie(cookieName);
+	var overlayCookie = readCookie(conf.cookiePrefix + conf.id);
 	if (overlayCookie) {
-		overlayGrid = true;
-		overlaySticky = true;
+		overlayOn = true;
+		sticky = true;
 		overlay.show();
 	}
 
 	// Keyboard controls
-	$(document).bind('keydown', function(e) {
-		var code = (e.keyCode ? e.keyCode : e.which);
-		var modifier = (e.altKey ? e.altKey : false);
-		//console.log('press: ' + code);
-		if (overlayGrid) {
-			// Toggle sticky overlay z-index (b == 66)
-			if (modifier && (code == 66)) {
-				if (overlay.css('z-index') == 9999) {
-					overlay.css('z-index', overlayZ);
-				}
-				else {
-					overlay.css('z-index', 9999);
-				}
-			}
-			// Turn sticky overlay on
-			if (modifier && (code == 13)) {
-				overlaySticky = true;
-				createCookie(cookieName, true, 1);
-			}
-			// Turn sticky overlay off
-			else if (overlaySticky && modifier && (code == 71)) {
-				overlay.hide();
-				overlayGrid = false;
-				overlaySticky = false;
-				eraseCookie(cookieName);
-			}
-		}
-		else{
-			// Show overlay (g == 71)
-			if (modifier && (code == 71)) {
-				overlay.show();
-				overlayGrid = true;
-			}
-		}
-	});
+	$(document).bind('keydown', keydownHandler);
+	$(document).bind('keyup', keyupHandler);
 
-	$(document).bind('keyup', function(e) {
-		var code = (e.keyCode ? e.keyCode : e.which);
-		var modifier = (e.altKey ? e.altKey : false);
-		// Hide overlay (g == 71)
-		if (!overlaySticky && modifier && (code == 71)) {
-			overlay.hide();
-			overlayGrid = false;
+	/**
+	 * Helpers
+	 */
+
+	function getModifier(e) {
+		if (conf.modifierKey == null) return true; // Bypass by default
+		var m = true;
+		switch(conf.modifierKey) {
+			case 'ctrl':
+				m = (e.ctrlKey ? e.ctrlKey : false);
+				break;
+
+			case 'alt':
+				m = (e.altKey ? e.altKey : false);
+				break;
+
+			case 'shift':
+				m = (e.shiftKey ? e.shiftKey : false);
+				break;
 		}
-	});
+		return m;
+	}
+
+	function getKey(e) {
+		var k = false, c = (e.keyCode ? e.keyCode : e.which);
+		if (c == 13) {
+			k = 'enter';
+		}
+		else {
+			k = String.fromCharCode(c).toLowerCase();
+		}
+		return k;
+	}
+
+	/**
+	 * Event handlers
+	 */
+
+	function keydownHandler(e) {
+		var m = getModifier(e);
+		if (!m) return true;
+		var key = getKey(e);
+		switch(key) {
+			case conf.showKey:
+				if (!overlayOn) {
+					overlay.show();
+					overlayOn = true;
+				}
+				else if (sticky) {
+					overlay.hide();
+					overlayOn = false;
+					sticky = false;
+					eraseCookie(conf.cookiePrefix + conf.id);
+				}
+				break;
+			case conf.stickKey:
+				if (overlayOn) {
+					// Turn sticky overlay on
+					sticky = true;
+					createCookie(conf.cookiePrefix + conf.id, true, 1);
+				}
+				break;
+			case conf.zIndexKey:
+				if (overlayOn) {
+					// Toggle sticky overlay z-index
+					if (overlay.css('z-index') == 9999) {
+						overlay.css('z-index', overlayZ);
+					}
+					else {
+						overlay.css('z-index', 9999);
+					}
+				}
+				break;
+		}
+	}
+
+	function keyupHandler(e) {
+		var m = getModifier(e);
+		if (!m) return true;
+		var key = getKey(e);
+		switch(key) {
+			case conf.showKey:
+				if (!sticky) {
+					overlay.hide();
+					overlayOn = false;
+				}
+				break;
+		}
+	}
 
 }
 
