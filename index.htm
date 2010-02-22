@@ -29,7 +29,7 @@ margin: 0 auto;
 }
 #footer{
 border-top: 1px dotted DarkGray;
-padding-top: 20px;
+padding-top: 19px;
 }
 h1, h2{
 color: Black;
@@ -92,23 +92,31 @@ margin-bottom: 20px;
 dd{
 margin: 0 0 20px 0;
 }
-pre{
-margin: 0;
-padding: 0;
+ins{
+text-decoration: none;
 }
 code{
-font-size: 14px; 
-line-height: 20px;
+font-size: 14px;
+line-height: 1;
 }
-pre code{ 
+textarea{
 font-family: 'Courier New', monospace;
+font-size: 14px;
+line-height: 20px;
 display: block;
+width: 600px;
 margin: 0 0 20px;
-padding: 20px 20px 20px 15px;
+padding: 0 0 0 15px;
 border: 0;
 color: Black;
 background: Gainsboro;
 border-left: 5px solid DarkGray;
+}
+#javascript-code{
+height: 180px;
+}
+#css-code{
+height: 1300px;
 }
 .summary em{
 font-style: normal;
@@ -164,12 +172,35 @@ text-transform: uppercase;
 }
 
 /**
+ * Classes for multiple grids
+ *
+ * When using more than one grid, remember to set the numberOfGrids 
+ * option in the hashgrid.js file.
+ */
+#grid.grid-1{
+
+    /* Vertical grid lines for grid 1 */
+    background: url(bg-grid-980.gif) repeat-y 0 0;
+
+}
+#grid.grid-2{
+
+    /* Vertical grid lines for grid 2 */
+    background: url(bg-grid-660.gif) repeat-y 160px 0;
+
+    /* Adjustments */
+    padding: 0 160px;
+    width: 660px;
+
+}
+
+/**
  * Horizontal grid lines, defined by your base line height
  *
  * Remember, the CSS properties that define the box model:
  * visible height = height + borders + margins + padding
  */
-#grid .horiz{
+#grid div.horiz{
 
     /* 20px line height */
     height: 19px;
@@ -187,35 +218,38 @@ text-transform: uppercase;
 
 <div id="content" role="main">
 
-<h1>#grid <em>v2</em></h1>
+<h1>#grid <em>v3</em></h1>
 
-<p class="summary"><em>Tue, 2 Feb 2010<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to fix it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">ALT</span> + <span class="key">G</span>.</p>
+<p class="summary"><em>Mon, 22 Feb 2010<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
 
 <h2>Download</h2>
 <p id="download"><a href="http://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="http://github.com/dotjay/hashgrid">GitHub</a></p>
 
 <h2 id="features">Features</h2>
 <ul>
-<li>Adaptable for all layout widths and alignments (this version assumes a 980px wide container including 20px gutters)</li>
-<li>Adaptable for any vertical rhythm value (this version assumes one lead of 20px)</li>
-<li>Show and hide, fix in place, or toggle foreground and background display using keyboard shortcuts</li>
-<li>Uses: A single JavaScript file, a few lines of CSS, and one image (for the vertical lines)</li>
+<li>Adaptable for all layout widths and alignments</li>
+<li>Adaptable for any vertical rhythm value</li>
+<li>Set keyboard shortcuts to show and hide the grid, hold it in place, toggle it to the foreground and background, and jump between multiple grids</li>
+<li>Uses a single JavaScript file, a little CSS, and an image (for the vertical lines)</li>
 </ul>
+<p>#grid comes set up with a 980px-wide container that includes 20px gutters, and assumes one lead of 20px. A second 660px-wide container is included to show you how to set up multiple grids.</p>
 
 <h2 id="installation">Installation</h2>
 <ol>
 <li><h3>Copy the <a href="http://github.com/dotjay/hashgrid/blob/master/hashgrid.js">hashgrid.js</a> script to your project</h3></li>
 <li><h3>Add the script to your page(s) just inside the <code>&#60;/body&#62;</code> tag</h3>
-<pre><code>&#60;!-- Grab latest version of jQuery --&#62;
-&#60;script type="text/javascript" 
+<textarea id="javascript-code" cols="68" rows="8" readonly="readonly">
+
+&#60;!-- Grab latest version of jQuery --&#62;
+&#60;script type="text/javascript"
   src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"&#62;
 &#60;/script&#62;
 
 &#60;!-- Include the hashgrid script --&#62;
-&#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
-</code></pre></li>
+&#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;</textarea></li>
 <li><h3>Add the CSS to your page(s)</h3>
-<pre><code>
+<textarea id="css-code" cols="68" rows="64" readonly="readonly">
+
 /**
  * Grid
  */
@@ -242,12 +276,35 @@ text-transform: uppercase;
 }
 
 /**
+ * Classes for multiple grids
+ *
+ * When using more than one grid, remember to set the numberOfGrids 
+ * option in the hashgrid.js file.
+ */
+#grid.grid-1{
+
+    /* Vertical grid lines for grid 1 */
+    background: url(bg-grid-980.gif) repeat-y 0 0;
+
+}
+#grid.grid-2{
+
+    /* Vertical grid lines for grid 2 */
+    background: url(bg-grid-660.gif) repeat-y 160px 0;
+
+    /* Adjustments */
+    padding: 0 160px;
+    width: 660px;
+
+}
+
+/**
  * Horizontal grid lines, defined by your base line height
  *
  * Remember, the CSS properties that define the box model:
  * visible height = height + borders + margins + padding
  */
-#grid .horiz{
+#grid div.horiz{
 
     /* 20px line height */
     height: 19px;
@@ -256,25 +313,29 @@ text-transform: uppercase;
     padding: 0;
 
 }
-</code></pre></li>
-<li><h3>Modify the CSS to suit your needs</h3>
-<p>It&#8217;s  annotated to help you. We&#8217;ve included a <a href="bg-grid-980.gif">980-pixel-wide background image</a> to provide the vertical grid lines (a 940-pixel-wide content area with 20px gutters). If you&#8217;re working to a <a href="http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-designing-grid-systems-part-1">different grid</a>, you will need to create a new image for your guides. Don&#8217;t forget to make the background transparent!</p></li>
+</textarea></li>
+<li><h3>Modify #grid to suit your needs</h3>
+<p>The CSS and JavaScript is annotated to help you. We&#8217;ve included a <a href="bg-grid-980.gif">980px-wide background image</a> to provide the vertical grid lines (a 940-pixel-wide content area with 20px gutters). If you&#8217;re working to a <a href="http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-designing-grid-systems-part-1">different grid</a>, you will need to create a new image for your guides. Don&#8217;t forget to make the background transparent!</p></li>
 </ol>
 
 <h2 id="usage">Usage</h2>
 <p>Note: The document must have keyboard focus for #grid to work, so click on the document background or <span class="key">tab</span> into the page.</p>
 <dl>
-<dt><span class="key">ALT</span> + <span class="key">G</span></dt>
-<dd>Overlay the grid until you release.</dd>
-<dt><span class="key">ALT</span> + <span class="key">G</span> + <span class="key">ENTER</span></dt>
-<dd>Make the grid sticky (<span class="key">ALT</span> + <span class="key">G</span> will remove it again).</dd>
-<dt><span class="key">ALT</span> + <span class="key">B</span></dt>
-<dd>Toggle the grid to the front/back.</dd>
+<dt><span class="key">G</span></dt>
+<dd>Show the grid until you release.</dd>
+<dt><span class="key">G</span> + <span class="key">H</span></dt>
+<dd>Show and hold the grid (<span class="key">G</span> will remove it again).</dd>
+<dt><span class="key">G</span> + <span class="key">F</span> (or <span class="key">F</span> while grid held)</dt>
+<dd>Toggle the grid to the foreground and back again.</dd>
+<dt><span class="key">G</span> + <span class="key">J</span> (or <span class="key">J</span> while grid held)</dt>
+<dd>Jump to the next grid.</dd>
 </dl>
 <p><em>N.B. A cookie conveniently remembers the state of the grid when you refresh the page. While the grid is in front, you will not be able to interact with the page.</em></p>
 
 <h2 id="release-notes">Release Notes</h2>
 <dl>
+<dt>v3&#8201;&#8212;&#8201;22 Feb 2010</dt>
+<dd>Multiple grids can be set up and cycled through at a key press. To avoid keyboard shortcut conflicts, the default keys have been changed (see <a href="#usage">Usage</a>). Using <span class="key">CTRL</span>, <span class="key">ALT</span> or <span class="key">SHIFT</span> as a modifier key is now optional. Keys no longer show or affect the grid while typing in forms.</dd>
 <dt>v2&#8201;&#8212;&#8201;2 Feb 2010</dt>
 <dd>Keys are now more easily configured (see top of hashgrid.js). Renamed the GridOverlay object to hashgrid. Fixed crash when using with disabled CSS.</dd>
 <dt>v1&#8201;&#8212;&#8201;21 Dec 2009</dt>
@@ -283,9 +344,9 @@ text-transform: uppercase;
 
 <h2 id="known-issues">Known Issues</h2>
 <ul>
-<li>IE 8: Fully functional, but <span class="key">ALT</span> + <span class="key">G</span> + <span class="key">ENTER</span> will put IE into full screen mode. Hit <span class="key">ALT</span> + <span class="key">ENTER</span> to toggle full screen mode off again.</li>
+<li><del>IE 8: Fully functional, but the default <span class="key">ALT</span> + <span class="key">G</span> + <span class="key">ENTER</span> shortcut puts IE into full screen mode. Hit <span class="key">ALT</span> + <span class="key">ENTER</span> to toggle full screen mode off again.</del><ins datetime="2010-02-22"> The default keyboard shortcuts have been changed.</ins></li>
 <li>IE 6: The grid is always in the foreground.</li>
-<li>Opera 9/10: Currently not working due to different key handling.</li>
+<li>Opera 9/10: Using <span class="key">CTRL</span> or <span class="key">ALT</span> as a modifier key will not work due to different key handling by the browser.</li>
 </ul>
 
 <h2 id="license">License</h2>
