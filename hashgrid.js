@@ -1,18 +1,34 @@
 /**
  * hashgrid (jQuery version)
  * http://github.com/dotjay/hashgrid
- * Version 2, 02 Feb 2010
+ * Version 3, 22 Feb 2010
  * By Jon Gibbins, accessibility.co.uk
+ *
+ * // Using a basic #grid setup
+ * var grid = new hashgrid();
+ *
+ * // Using #grid with a custom id (e.g. #mygrid)
+ * var grid = new hashgrid("mygrid");
+ *
+ * // Using #grid with additional options
+ * var grid = new hashgrid({
+ *     id: 'mygrid',            // id for the grid container
+ *     modifierKey: 'alt',      // optional 'ctrl', 'alt' or 'shift'
+ *     showGridKey: 's',        // key to show the grid
+ *     holdGridKey: 'enter',    // key to hold the grid in place
+ *     foregroundKey: 'f',      // key to toggle foreground/background
+ *     jumpGridsKey: 'd',       // key to cycle through the grid classes
+ *     numberOfGrids: 2,        // number of grid classes used
+ *     classPrefix: 'class',    // prefix for the grid classes
+ *     cookiePrefix: 'mygrid'   // prefix for the cookie name
+ * });
+ *
  */
 
 $(document).ready(function() {
 
 	var grid = new hashgrid({
-		id: 'grid',
-		modifierKey : 'alt',
-		showKey: 'g',
-		stickKey: 'enter',
-		zIndexKey: 'b'
+		numberOfGrids: 2
 	});
 
 });
@@ -23,43 +39,49 @@ $(document).ready(function() {
  */
 var hashgrid = function(set) {
 
+	var options = {
+		id: 'grid',             // id for the grid container
+		modifierKey: null,      // optional 'ctrl', 'alt' or 'shift'
+		showGridKey: 'g',       // key to show the grid
+		holdGridKey: 'h',       // key to hold the grid in place
+		foregroundKey: 'f',     // key to toggle foreground/background
+		jumpGridsKey: 'j',      // key to cycle through the grid classes
+		numberOfGrids: 1,       // number of grid classes used
+		classPrefix: 'grid-',   // prefix for the grid classes
+		cookiePrefix: 'hashgrid'// prefix for the cookie name
+	};
 	var overlayOn = false,
 		sticky = false,
-		conf = {
-			id: 'grid',
-			modifierKey: null,
-			showKey: 'g',
-			stickKey: 'enter',
-			zIndexKey: 'b',
-			cookiePrefix: 'hashgrid'
-		};
+		overlayZState = 'B',
+		overlayZBackground = -1,
+		overlayZForeground = 9999,
+		classNumber = 1;
 
-	// Apply user settings
+	// Apply options
 	if (typeof set == 'object') {
 		var k;
-		for (k in set) conf[k] = set[k];
+		for (k in set) options[k] = set[k];
 	}
 	else if (typeof set == 'string') {
-		conf.id = set;
+		options.id = set;
 	}
 
 	// Remove any conflicting overlay
-	if ($('#' + conf.id).length > 0) {
-		$('#' + conf.id).remove();
+	if ($('#' + options.id).length > 0) {
+		$('#' + options.id).remove();
 	}
 
 	// Create overlay, hidden before adding to DOM
 	var overlayEl = $('<div></div>');
-	overlayEl.attr('id', conf.id).css('display', 'none');
+	overlayEl
+		.attr('id', options.id)
+		.addClass(options.classPrefix + classNumber)
+		.css('display', 'none');
 	$("body").prepend(overlayEl);
-	var overlay = $('#' + conf.id);
+	var overlay = $('#' + options.id);
 
 	// Unless a custom z-index is set, ensure the overlay will be behind everything
-	var overlayZ = overlay.css('z-index');
-	if (overlayZ == 'auto') {
-		overlayZ = '-1';
-		overlay.css('z-index', overlayZ);
-	}
+	if (overlay.css('z-index') == 'auto') overlay.css('z-index', overlayZBackground);
 
 	// Override the default overlay height with the actual page height
 	var pageHeight = parseFloat($(document).height());
@@ -81,12 +103,24 @@ var hashgrid = function(set) {
 		overlay.append('<div class="horiz"></div>');
 	}
 
-	// Check for previous overlay state
-	var overlayCookie = readCookie(conf.cookiePrefix + conf.id);
-	if (overlayCookie) {
-		overlayOn = true;
-		sticky = true;
-		overlay.show();
+	// Check for saved state
+	var overlayCookie = readCookie(options.cookiePrefix + options.id);
+	if (typeof overlayCookie == 'string') {
+		var state = overlayCookie.split(',');
+		state[2] = Number(state[2]);
+		if ((typeof state[2] == 'number') && !isNaN(state[2])) {
+			classNumber = state[2].toFixed(0);
+			overlay.addClass(options.classPrefix + classNumber);
+		}
+		if (state[1] == 'F') {
+			overlayZState = 'F';
+			overlay.css('z-index', overlayZForeground);
+		}
+		if (state[0] == '1') {
+			overlayOn = true;
+			sticky = true;
+			overlay.show();
+		}
 	}
 
 	// Keyboard controls
@@ -98,9 +132,9 @@ var hashgrid = function(set) {
 	 */
 
 	function getModifier(e) {
-		if (conf.modifierKey == null) return true; // Bypass by default
+		if (options.modifierKey == null) return true; // Bypass by default
 		var m = true;
-		switch(conf.modifierKey) {
+		switch(options.modifierKey) {
 			case 'ctrl':
 				m = (e.ctrlKey ? e.ctrlKey : false);
 				break;
@@ -118,13 +152,15 @@ var hashgrid = function(set) {
 
 	function getKey(e) {
 		var k = false, c = (e.keyCode ? e.keyCode : e.which);
-		if (c == 13) {
-			k = 'enter';
-		}
-		else {
-			k = String.fromCharCode(c).toLowerCase();
-		}
+		// Handle keywords
+		if (c == 13) k = 'enter';
+		// Handle letters
+		else k = String.fromCharCode(c).toLowerCase();
 		return k;
+	}
+
+	function saveState() {
+		createCookie(options.cookiePrefix + options.id, (sticky ? '1' : '0') + ',' + overlayZState + ',' + classNumber, 1);
 	}
 
 	/**
@@ -132,11 +168,14 @@ var hashgrid = function(set) {
 	 */
 
 	function keydownHandler(e) {
+		var source = e.target.tagName.toLowerCase();
+		if ((source == 'input') || (source == 'textarea') || (source == 'select')) return true;
 		var m = getModifier(e);
 		if (!m) return true;
-		var key = getKey(e);
-		switch(key) {
-			case conf.showKey:
+		var k = getKey(e);
+		if (!k) return true;
+		switch(k) {
+			case options.showGridKey:
 				if (!overlayOn) {
 					overlay.show();
 					overlayOn = true;
@@ -145,25 +184,38 @@ var hashgrid = function(set) {
 					overlay.hide();
 					overlayOn = false;
 					sticky = false;
-					eraseCookie(conf.cookiePrefix + conf.id);
+					saveState();
 				}
 				break;
-			case conf.stickKey:
-				if (overlayOn) {
+			case options.holdGridKey:
+				if (overlayOn && !sticky) {
 					// Turn sticky overlay on
 					sticky = true;
-					createCookie(conf.cookiePrefix + conf.id, true, 1);
+					saveState();
 				}
 				break;
-			case conf.zIndexKey:
+			case options.foregroundKey:
 				if (overlayOn) {
 					// Toggle sticky overlay z-index
-					if (overlay.css('z-index') == 9999) {
-						overlay.css('z-index', overlayZ);
+					if (overlay.css('z-index') == overlayZForeground) {
+						overlay.css('z-index', overlayZBackground);
+						overlayZState = 'B';
 					}
 					else {
-						overlay.css('z-index', 9999);
+						overlay.css('z-index', overlayZForeground);
+						overlayZState = 'F';
 					}
+					saveState();
+				}
+				break;
+			case options.jumpGridsKey:
+				if (overlayOn && (options.numberOfGrids > 1)) {
+					// Cycle through the available grids
+					overlay.removeClass(options.classPrefix + classNumber);
+					classNumber++;
+					if (classNumber > options.numberOfGrids) classNumber = 1;
+					overlay.addClass(options.classPrefix + classNumber);
+					saveState();
 				}
 				break;
 		}
@@ -172,9 +224,10 @@ var hashgrid = function(set) {
 	function keyupHandler(e) {
 		var m = getModifier(e);
 		if (!m) return true;
-		var key = getKey(e);
-		switch(key) {
-			case conf.showKey:
+		var k = getKey(e);
+		if (!k) return true;
+		switch(k) {
+			case options.showGridKey:
 				if (!sticky) {
 					overlay.hide();
 					overlayOn = false;
@@ -188,7 +241,7 @@ var hashgrid = function(set) {
 
 /**
  * Cookie functions
- * 
+ *
  * By Peter-Paul Koch:
  * http://www.quirksmode.org/js/cookies.html
  */
