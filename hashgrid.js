@@ -235,13 +235,9 @@ var hashgrid = function(set) {
 		if (!m) return true;
 		var k = getKey(e);
 		if (!k) return true;
-		switch(k) {
-			case options.showGridKey:
-				if (!sticky) {
-					overlay.hide();
-					overlayOn = false;
-				}
-				break;
+		if ((k == options.showGridKey) && !sticky) {
+			overlay.hide();
+			overlayOn = false;
 		}
 	}
 
