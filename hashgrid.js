@@ -22,9 +22,13 @@
  *     classPrefix: 'class',    // prefix for the grid classes
  *     cookiePrefix: 'mygrid'   // prefix for the cookie name
  * });
- *
  */
 
+
+/**
+ * You can call hashgrid from your own code, but it's loaded here by
+ * default for convenience.
+ */
 $(document).ready(function() {
 
 	var grid = new hashgrid({
@@ -75,7 +79,6 @@ var hashgrid = function(set) {
 	var overlayEl = $('<div></div>');
 	overlayEl
 		.attr('id', options.id)
-		.addClass(options.classPrefix + classNumber)
 		.css('display', 'none');
 	$("body").prepend(overlayEl);
 	var overlay = $('#' + options.id);
@@ -121,6 +124,9 @@ var hashgrid = function(set) {
 			sticky = true;
 			overlay.show();
 		}
+	}
+	else {
+		overlay.addClass(options.classPrefix + classNumber)
 	}
 
 	// Keyboard controls
@@ -215,6 +221,9 @@ var hashgrid = function(set) {
 					classNumber++;
 					if (classNumber > options.numberOfGrids) classNumber = 1;
 					overlay.addClass(options.classPrefix + classNumber);
+					if (/webkit/.test( navigator.userAgent.toLowerCase() )) {
+						forceRepaint();
+					}
 					saveState();
 				}
 				break;
@@ -268,4 +277,18 @@ function readCookie(name) {
 
 function eraseCookie(name) {
 	createCookie(name,"",-1);
+}
+
+
+/**
+ * Forces a repaint (because WebKit has issues)
+ * http://www.sitepoint.com/forums/showthread.php?p=4538763
+ * http://www.phpied.com/the-new-game-show-will-it-reflow/
+ */
+function forceRepaint() {
+	var ss = document.styleSheets[0];
+	try {
+		ss.addRule('.xxxxxx', 'position: relative');
+		ss.removeRule(ss.rules.length - 1);
+	} catch(e){}
 }
