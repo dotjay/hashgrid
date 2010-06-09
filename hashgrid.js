@@ -20,7 +20,8 @@
  *     jumpGridsKey: 'd',       // key to cycle through the grid classes
  *     numberOfGrids: 2,        // number of grid classes used
  *     classPrefix: 'class',    // prefix for the grid classes
- *     cookiePrefix: 'mygrid'   // prefix for the cookie name
+ *     cookiePrefix: 'mygrid',  // prefix for the cookie name
+ *     removeExisting: true     // remove existing grids
  * });
  */
 
@@ -44,15 +45,16 @@ $(document).ready(function() {
 var hashgrid = function(set) {
 
 	var options = {
-		id: 'grid',             // id for the grid container
-		modifierKey: null,      // optional 'ctrl', 'alt' or 'shift'
-		showGridKey: 'g',       // key to show the grid
-		holdGridKey: 'h',       // key to hold the grid in place
-		foregroundKey: 'f',     // key to toggle foreground/background
-		jumpGridsKey: 'j',      // key to cycle through the grid classes
-		numberOfGrids: 1,       // number of grid classes used
-		classPrefix: 'grid-',   // prefix for the grid classes
-		cookiePrefix: 'hashgrid'// prefix for the cookie name
+		className: 'hashgrid',   // class for the grid container
+		modifierKey: null,       // optional 'ctrl', 'alt' or 'shift'
+		showGridKey: 'g',        // key to show the grid
+		holdGridKey: 'h',        // key to hold the grid in place
+		foregroundKey: 'f',      // key to toggle foreground/background
+		jumpGridsKey: 'j',       // key to cycle through the grid classes
+		numberOfGrids: 2,        // number of grid classes used
+		classPrefix: 'grid-',    // prefix for the grid classes
+		cookiePrefix: 'hashgrid',// prefix for the cookie name
+		removeExisting: false    // don't remove existing grids
 	};
 	var overlayOn = false,
 		sticky = false,
@@ -67,35 +69,46 @@ var hashgrid = function(set) {
 		for (k in set) options[k] = set[k];
 	}
 	else if (typeof set == 'string') {
-		options.id = set;
+		options.className = set;
 	}
+
+	var overlay = $('.' + options.className);
 
 	// Remove any conflicting overlay
-	if ($('#' + options.id).length > 0) {
-		$('#' + options.id).remove();
+	if (overlay.length > 0 && options.removeExisting) {
+		overlay.remove();
 	}
 
-	// Create overlay, hidden before adding to DOM
-	var overlayEl = $('<div></div>');
-	overlayEl
-		.attr('id', options.id)
-		.css('display', 'none');
-	$("body").prepend(overlayEl);
-	var overlay = $('#' + options.id);
+	if (overlay.length == 0) {
+		// Create overlay, hidden before adding to DOM
+		overlay = $('<div></div>');
+		overlay
+	.addClass(options.className)
+	.css('display', 'none');
+		var heightSource = $('body');
+		heightSource.prepend(overlay);
+	}
+	overlay.each(function(){
+	var overlay = $(this);
+	overlay.show();
+	var heightSource = overlay.offsetParent();
+	overlay.hide();
+	// Override the default overlay height with the actual page height
+	if (heightSource.is('body'))
+	    var pageHeight = $(document).height();
+	else
+	    var pageHeight = heightSource[0].scrollHeight;
+	overlay.height(pageHeight);
 
 	// Unless a custom z-index is set, ensure the overlay will be behind everything
 	if (overlay.css('z-index') == 'auto') overlay.css('z-index', overlayZBackground);
-
-	// Override the default overlay height with the actual page height
-	var pageHeight = parseFloat($(document).height());
-	overlay.height(pageHeight);
 
 	// Add the first grid line so that we can measure it
 	overlay.append('<div class="horiz first-line">');
 
 	// Calculate the number of grid lines needed
 	var overlayGridLines = overlay.children('.horiz'),
-		overlayGridLineHeight = parseFloat(overlayGridLines.css('height')) + parseFloat(overlayGridLines.css('border-bottom-width'));
+	    overlayGridLineHeight = parseFloat(overlayGridLines.css('height')) + parseFloat(overlayGridLines.css('border-bottom-width'));
 
 	// Break on zero line height
 	if (overlayGridLineHeight <= 0) return true;
@@ -103,11 +116,12 @@ var hashgrid = function(set) {
 	// Add the remaining grid lines
 	var i, numGridLines = Math.floor(pageHeight / overlayGridLineHeight);
 	for (i = numGridLines - 1; i >= 1; i--) {
-		overlay.append('<div class="horiz"></div>');
+	    overlay.append('<div class="horiz"></div>');
 	}
+	});
 
 	// Check for saved state
-	var overlayCookie = readCookie(options.cookiePrefix + options.id);
+	var overlayCookie = readCookie(options.cookiePrefix + options.className);
 	if (typeof overlayCookie == 'string') {
 		var state = overlayCookie.split(',');
 		state[2] = Number(state[2]);
@@ -166,7 +180,7 @@ var hashgrid = function(set) {
 	}
 
 	function saveState() {
-		createCookie(options.cookiePrefix + options.id, (sticky ? '1' : '0') + ',' + overlayZState + ',' + classNumber, 1);
+		createCookie(options.cookiePrefix + options.className, (sticky ? '1' : '0') + ',' + overlayZState + ',' + classNumber, 1);
 	}
 
 	/**
