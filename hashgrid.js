@@ -79,7 +79,10 @@ var hashgrid = function(set) {
 	var overlayEl = $('<div></div>');
 	overlayEl
 		.attr('id', options.id)
-		.css('display', 'none');
+		.css({
+			display: 'none',
+			'pointer-events': 'none'
+		});
 	$("body").prepend(overlayEl);
 	var overlay = $('#' + options.id);
 
