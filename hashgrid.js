@@ -109,6 +109,25 @@ var hashgrid = function(set) {
 		overlay.append('<div class="horiz"></div>');
 	}
 
+	// vertical grid
+	overlay.append($('<div class="vert-container"></div>'));
+	var overlayVert = overlay.children('.vert-container');
+	var gridWidth = overlay.width();
+	overlayVert.css({width: gridWidth, position: 'absolute', top: 0});
+	overlayVert.append('<div class="vert first-line">&nbsp;</div>');
+
+	var overlayGridLines = overlayVert.children('.vert');
+	var overlayGridLinesWidth = overlayGridLines.outerWidth(true);
+
+	numGridLines = Math.floor(gridWidth / overlayGridLinesWidth);
+
+	for (i = 0; i < numGridLines; i++) {
+		overlayVert.append('<div class="vert">&nbsp;</div>');
+	}
+	overlayVert.children()
+		.height(pageHeight)
+		.css({display: 'inline-block'});
+
 	// Check for saved state
 	var overlayCookie = readCookie(options.cookiePrefix + options.id);
 	if (typeof overlayCookie == 'string') {
@@ -125,11 +144,11 @@ var hashgrid = function(set) {
 		if (state[0] == '1') {
 			overlayOn = true;
 			sticky = true;
-			overlay.show();
+			showOverlay();
 		}
 	}
 	else {
-		overlay.addClass(options.classPrefix + classNumber)
+		overlay.addClass(options.classPrefix + classNumber);
 	}
 
 	// Keyboard controls
@@ -172,6 +191,18 @@ var hashgrid = function(set) {
 		createCookie(options.cookiePrefix + options.id, (sticky ? '1' : '0') + ',' + overlayZState + ',' + classNumber, 1);
 	}
 
+	function showOverlay() {
+		overlay.show();
+		overlayVert.css({width: overlay.width()});
+		// hide any vertical blocks that aren't at the top of the viewport
+		overlayVert.children('.vert').each(function () {
+			$(this).css('display','inline-block');
+			if ($(this).offset().top > 0) {
+				$(this).hide();
+			}
+		});
+	}
+
 	/**
 	 * Event handlers
 	 */
@@ -186,7 +217,7 @@ var hashgrid = function(set) {
 		switch(k) {
 			case options.showGridKey:
 				if (!overlayOn) {
-					overlay.show();
+					showOverlay();
 					overlayOn = true;
 				}
 				else if (sticky) {
@@ -224,6 +255,7 @@ var hashgrid = function(set) {
 					classNumber++;
 					if (classNumber > options.numberOfGrids) classNumber = 1;
 					overlay.addClass(options.classPrefix + classNumber);
+					showOverlay();
 					if (/webkit/.test( navigator.userAgent.toLowerCase() )) {
 						forceRepaint();
 					}

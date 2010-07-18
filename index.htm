@@ -155,9 +155,6 @@ text-transform: uppercase;
  */
 #grid{
 
-    /* Vertical grid lines */
-    background: url(bg-grid-980.gif) repeat-y 0 0;
-
     /* Dimensions - same width as your grid with gutters */
     width: 980px;
 
@@ -176,27 +173,37 @@ text-transform: uppercase;
 }
 
 /**
- * Classes for multiple grids
- *
- * When using more than one grid, remember to set the numberOfGrids 
- * option in the hashgrid.js file.
+ * Classes for vertical grids
  */
-#grid.grid-1{
-
-    /* Vertical grid lines for grid 1 */
-    background: url(bg-grid-980.gif) repeat-y 0 0;
-
+#grid div.vert {
+    margin-right: 20px;
+    width: 138px;
+    border: 1px dashed #aaa;
+    border-width: 0 1px;
 }
-#grid.grid-2{
 
-    /* Vertical grid lines for grid 2 */
-    background: url(bg-grid-660.gif) repeat-y 160px 0;
+#grid div.vert.first-line {
+    margin-left: 20px;
+}
 
+/**
+* Classes for multiple grids
+*
+* When using more than one grid, remember to set the numberOfGrids 
+* option in the hashgrid.js file.
+*/
+#grid.grid-1 div.vert {
+    border-color: green;
+}
+#grid.grid-2 div.vert {
+    border-color: red;
+}
+#grid.grid-2 {
     /* Adjustments */
     padding: 0 160px;
     width: 660px;
-
 }
+
 
 /**
  * Horizontal grid lines, defined by your base line height
@@ -234,7 +241,7 @@ text-transform: uppercase;
 <li>Adaptable for all layout widths and alignments</li>
 <li>Adaptable for any vertical rhythm value</li>
 <li>Set keyboard shortcuts to show and hide the grid, hold it in place, toggle it to the foreground and background, and jump between multiple grids</li>
-<li>Uses a single JavaScript file, a little CSS, and an image (for the vertical lines)</li>
+<li>Uses a single JavaScript file, a little CSS</li>
 </ul>
 <p>#grid comes set up with a 980px-wide container that includes 20px gutters, and assumes one lead of 20px. A second 660px-wide container is included to show you how to set up multiple grids.</p>
 
@@ -259,9 +266,6 @@ text-transform: uppercase;
  */
 #grid{
 
-    /* Vertical grid lines */
-    background: url(bg-grid-980.gif) repeat-y 0 0;
-
     /* Dimensions - same width as your grid with gutters */
     width: 980px;
 
@@ -280,26 +284,35 @@ text-transform: uppercase;
 }
 
 /**
- * Classes for multiple grids
- *
- * When using more than one grid, remember to set the numberOfGrids 
- * option in the hashgrid.js file.
+ * Classes for vertical grids
  */
-#grid.grid-1{
-
-    /* Vertical grid lines for grid 1 */
-    background: url(bg-grid-980.gif) repeat-y 0 0;
-
+#grid div.vert {
+    margin-right: 20px;
+    width: 138px;
+    border: 1px dashed #aaa;
+    border-width: 0 1px;
 }
-#grid.grid-2{
 
-    /* Vertical grid lines for grid 2 */
-    background: url(bg-grid-660.gif) repeat-y 160px 0;
+#grid div.vert.first-line {
+    margin-left: 20px;
+}
 
+/**
+* Classes for multiple grids
+*
+* When using more than one grid, remember to set the numberOfGrids 
+* option in the hashgrid.js file.
+*/
+#grid.grid-1 div.vert {
+    border-color: green;
+}
+#grid.grid-2 div.vert {
+    border-color: red;
+}
+#grid.grid-2 {
     /* Adjustments */
     padding: 0 160px;
     width: 660px;
-
 }
 
 /**
@@ -319,7 +332,7 @@ text-transform: uppercase;
 }
 </textarea></li>
 <li><h3>Modify #grid to suit your needs</h3>
-<p>The CSS and JavaScript is annotated to help you. We&#8217;ve included a <a href="bg-grid-980.gif">980px-wide background image</a> to provide the vertical grid lines (a 940-pixel-wide content area with 20px gutters). If you&#8217;re working to a <a href="http://www.markboulton.co.uk/journal/comments/five-simple-steps-to-designing-grid-systems-part-1">different grid</a>, you will need to create a new image for your guides. Don&#8217;t forget to make the background transparent!</p></li>
+<p>The CSS and JavaScript is annotated to help you.</p></li>
 </ol>
 
 <h2 id="usage">Usage</h2>
