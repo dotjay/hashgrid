@@ -114,16 +114,23 @@ var hashgrid = function(set) {
 	var overlayVert = overlay.children('.vert-container');
 	var gridWidth = overlay.width();
 	overlayVert.css({width: gridWidth, position: 'absolute', top: 0});
-	overlayVert.append('<div class="vert first-line">&nbsp;</div>');
+	overlayVert.append('<div class="vert">&nbsp;</div>');
 
 	var overlayGridLines = overlayVert.children('.vert');
+	// need to temporarily set this to display: block to get the size
+	overlay.css({visibility: 'hidden', display: 'block'});
 	var overlayGridLinesWidth = overlayGridLines.outerWidth(true);
+	overlay.css({visibility: 'inherit', display: 'none'});
+	overlayGridLines.addClass('first-line');
 
 	numGridLines = Math.floor(gridWidth / overlayGridLinesWidth);
 
-	for (i = 0; i < numGridLines; i++) {
+	// multiply this by two to make sure we have enough lines
+	// (we *could* still run out)
+	for (i = 0; i < numGridLines * 2; i++) {
 		overlayVert.append('<div class="vert">&nbsp;</div>');
 	}
+
 	overlayVert.children()
 		.height(pageHeight)
 		.css({display: 'inline-block'});
