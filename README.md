@@ -9,6 +9,6 @@ Features
  * Adaptable for all layout widths and alignments
  * Adaptable for any vertical rhythm value
  * Set keyboard shortcuts to show and hide the grid, hold it in place, toggle it to the foreground and background, and jump between multiple grids
- * Uses a single JavaScript file, a little CSS, and an image (for the vertical lines)
+ * Uses a single JavaScript file, and a little CSS
 
 Notes on installation and usage can be found in the included index.htm file.
