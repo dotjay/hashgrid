@@ -1,8 +1,11 @@
 /**
  * hashgrid (jQuery version)
  * http://github.com/dotjay/hashgrid
- * Version 4, 29 Mar 2010
- * By Jon Gibbins, accessibility.co.uk
+ * Version 5, 3 Nov 2010
+ * Written by Jon Gibbins, dotjay.co.uk, accessibility.co.uk
+ * Contibutors:
+ * Sean Coates, seancoates.com
+ * Phil Dokas, jetless.org
  *
  * // Using a basic #grid setup
  * var grid = new hashgrid();
