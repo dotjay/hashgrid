@@ -173,35 +173,24 @@ text-transform: uppercase;
 }
 
 /**
- * Classes for vertical grids
+ * Vertical grid lines
+ *
+ * Set the column width taking the borders into consideration,
+ * and use margins to set column gutters.
  */
-#grid div.vert {
-    margin-right: 20px;
-    width: 138px;
-    border: 1px dashed darkgray;
+#grid div.vert{
+
+    width: 139px;
+    border: solid darkturquoise;
     border-width: 0 1px;
+    margin-right: 19px;
+
 }
 
-#grid div.vert.first-line {
-    margin-left: 20px;
-}
+#grid div.vert.first-line{
 
-/**
-* Classes for multiple grids
-*
-* When using more than one grid, remember to set the numberOfGrids 
-* option in the hashgrid.js file.
-*/
-#grid.grid-1 div.vert {
-    border-color: green;
-}
-#grid.grid-2 div.vert {
-    border-color: red;
-}
-#grid.grid-2 {
-    /* Adjustments */
-    padding: 0 160px;
-    width: 660px;
+    margin-left: 19px;
+
 }
 
 
@@ -221,6 +210,32 @@ text-transform: uppercase;
 
 }
 
+/**
+* Classes for multiple grids
+*
+* When using more than one grid, remember to set the numberOfGrids 
+* option in the hashgrid.js file.
+*/
+#grid.grid-1 div.vert{
+
+    /* Vertical grid line colour for grid 1 */
+    border-color: darkturquoise;
+
+}
+#grid.grid-2{
+
+    /* Adjustments */
+    padding: 0 160px;
+    width: 660px;
+
+}
+#grid.grid-2 div.vert{
+
+    /* Vertical grid line colour for grid 2 */
+    border-color: crimson;
+
+}
+
 </style>
 
 </head>
@@ -229,9 +244,9 @@ text-transform: uppercase;
 
 <div id="content" role="main">
 
-<h1>#grid <em>v4</em></h1>
+<h1>#grid <em>v5</em></h1>
 
-<p class="summary"><em>Mon, 29 Mar 2010<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
+<p class="summary"><em>Wed, 3 Nov 2010<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
 
 <h2>Download</h2>
 <p id="download"><a href="http://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="http://github.com/dotjay/hashgrid">GitHub</a></p>
@@ -241,7 +256,7 @@ text-transform: uppercase;
 <li>Adaptable for all layout widths and alignments</li>
 <li>Adaptable for any vertical rhythm value</li>
 <li>Set keyboard shortcuts to show and hide the grid, hold it in place, toggle it to the foreground and background, and jump between multiple grids</li>
-<li>Uses a single JavaScript file, a little CSS</li>
+<li>Uses a single JavaScript file and a little CSS to control the grid lines, columns and gutters</li>
 </ul>
 <p>#grid comes set up with a 980px-wide container that includes 20px gutters, and assumes one lead of 20px. A second 660px-wide container is included to show you how to set up multiple grids.</p>
 
@@ -284,36 +299,26 @@ text-transform: uppercase;
 }
 
 /**
- * Classes for vertical grids
+ * Vertical grid lines
+ *
+ * Set the column width taking the borders into consideration,
+ * and use margins to set column gutters.
  */
-#grid div.vert {
-    margin-right: 20px;
-    width: 138px;
-    border: 1px dashed darkgray;
+#grid div.vert{
+
+    width: 139px;
+    border: solid darkturquoise;
     border-width: 0 1px;
+    margin-right: 19px;
+
 }
 
-#grid div.vert.first-line {
-    margin-left: 20px;
+#grid div.vert.first-line{
+
+    margin-left: 19px;
+
 }
 
-/**
-* Classes for multiple grids
-*
-* When using more than one grid, remember to set the numberOfGrids 
-* option in the hashgrid.js file.
-*/
-#grid.grid-1 div.vert {
-    border-color: green;
-}
-#grid.grid-2 div.vert {
-    border-color: red;
-}
-#grid.grid-2 {
-    /* Adjustments */
-    padding: 0 160px;
-    width: 660px;
-}
 
 /**
  * Horizontal grid lines, defined by your base line height
@@ -328,6 +333,32 @@ text-transform: uppercase;
     border-bottom: 1px dotted darkgray;
     margin: 0;
     padding: 0;
+
+}
+
+/**
+* Classes for multiple grids
+*
+* When using more than one grid, remember to set the numberOfGrids 
+* option in the hashgrid.js file.
+*/
+#grid.grid-1 div.vert{
+
+    /* Vertical grid line colour for grid 1 */
+    border-color: darkturquoise;
+
+}
+#grid.grid-2{
+
+    /* Adjustments */
+    padding: 0 160px;
+    width: 660px;
+
+}
+#grid.grid-2 div.vert{
+
+    /* Vertical grid line colour for grid 2 */
+    border-color: crimson;
 
 }
 </textarea></li>
@@ -351,6 +382,14 @@ text-transform: uppercase;
 
 <h2 id="release-notes">Release Notes</h2>
 <dl>
+<dt>v5&#8201;&#8212;&#8201;3 Nov 2010</dt>
+<dd>
+<ul>
+<li>Vertical grid lines can now be set using CSS&#8212; images are no longer required! Thanks to <a href="http://twitter.com/coates">Sean Coates</a> for the contribution.</li>
+<li>Click events now interact with the page when the grid is in the foreground. Tested in WebKit and Gecko. Thanks to <a href="http://twitter.com/pdokas">Phil Dokas</a> for the tip about using the <code>pointer-events</code> CSS property.</li>
+<li>Improved grid rendering, fixing a compatibility issue with jQuery 1.4.3. Thanks to everybody who&#8217;s given feedback.</li>
+</ul>
+</dd>
 <dt>v4&#8201;&#8212;&#8201;29 Mar 2010</dt>
 <dd>Fixes for multiple grid support under WebKit (Safari and Chrome).</dd>
 <dt>v3&#8201;&#8212;&#8201;22 Feb 2010</dt>
