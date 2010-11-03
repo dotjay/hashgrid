@@ -29,19 +29,6 @@ if (typeof jQuery == "undefined") {
 
 
 /**
- * You can call hashgrid from your own code, but it's loaded here by
- * default for convenience.
- */
-$(document).ready(function() {
-
-	var grid = new hashgrid({
-		numberOfGrids: 2
-	});
-
-});
-
-
-/**
  * hashgrid overlay
  */
 var hashgrid = function(set) {
@@ -300,6 +287,19 @@ var hashgrid = function(set) {
 	}
 
 }
+
+
+/**
+ * You can call hashgrid from your own code, but it's loaded here by
+ * default for convenience.
+ */
+$(document).ready(function() {
+
+	var grid = new hashgrid({
+		numberOfGrids: 2
+	});
+
+});
 
 
 /**
