@@ -277,12 +277,56 @@ var hashgrid = function(set) {
 		}
 	}
 
+	/**
+	 * Cookie functions
+	 *
+	 * By Peter-Paul Koch:
+	 * http://www.quirksmode.org/js/cookies.html
+	 */
+	function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+	}
+
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+
+	function eraseCookie(name) {
+		createCookie(name,"",-1);
+	}
+
+	/**
+	 * Forces a repaint (because WebKit has issues)
+	 * http://www.sitepoint.com/forums/showthread.php?p=4538763
+	 * http://www.phpied.com/the-new-game-show-will-it-reflow/
+	 */
+	function forceRepaint() {
+		var ss = document.styleSheets[0];
+		try {
+			ss.addRule('.xxxxxx', 'position: relative');
+			ss.removeRule(ss.rules.length - 1);
+		} catch(e){}
+	}
+
 }
 
 
 /**
- * You can call hashgrid from your own code, but it's loaded here by
- * default for convenience.
+ * You can call hashgrid from your own code, but it's loaded here as
+ * an example for your convenience.
  */
 $(document).ready(function() {
 
@@ -291,49 +335,3 @@ $(document).ready(function() {
 	});
 
 });
-
-
-/**
- * Cookie functions
- *
- * By Peter-Paul Koch:
- * http://www.quirksmode.org/js/cookies.html
- */
-function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
-
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
-
-
-/**
- * Forces a repaint (because WebKit has issues)
- * http://www.sitepoint.com/forums/showthread.php?p=4538763
- * http://www.phpied.com/the-new-game-show-will-it-reflow/
- */
-function forceRepaint() {
-	var ss = document.styleSheets[0];
-	try {
-		ss.addRule('.xxxxxx', 'position: relative');
-		ss.removeRule(ss.rules.length - 1);
-	} catch(e){}
-}
