@@ -94,17 +94,30 @@ var hashgrid = function(set) {
 	overlay.height(pageHeight);
 
 	// Add the first grid line so that we can measure it
-	overlay.append('<div class="horiz first-line">');
+	overlay.append('<div id="' + options.id + '-horiz" class="horiz first-line">');
+
+	// Position off-screen and display to calculate height
+	var top = overlay.css("top");
+	overlay.css({
+		top: "-999px",
+		display: "block"
+	});
 
 	// Calculate the number of grid lines needed
-	var overlayGridLines = overlay.children('.horiz'),
-		overlayGridLineHeight = parseFloat(overlayGridLines.css('height')) + parseFloat(overlayGridLines.css('border-bottom-width'));
+	var line = $('#' + options.id + '-horiz'),
+		lineHeight = line.outerHeight();
+
+	// Hide and reset top
+	overlay.css({
+		display: "none",
+		top: top
+	});
 
 	// Break on zero line height
-	if (overlayGridLineHeight <= 0) return true;
+	if (lineHeight <= 0) return true;
 
 	// Add the remaining grid lines
-	var i, numGridLines = Math.floor(pageHeight / overlayGridLineHeight);
+	var i, numGridLines = Math.floor(pageHeight / lineHeight);
 	for (i = numGridLines - 1; i >= 1; i--) {
 		overlay.append('<div class="horiz"></div>');
 	}
