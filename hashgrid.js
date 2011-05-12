@@ -110,10 +110,12 @@ var hashgrid = function(set) {
 	if (lineHeight <= 0) return true;
 
 	// Add the remaining grid lines
-	var i, numGridLines = Math.floor(pageHeight / lineHeight);
+	var i, numGridLines = Math.floor(pageHeight / lineHeight),
+      gridLines = ''; 
 	for (i = numGridLines - 1; i >= 1; i--) {
-		overlay.append('<div class="horiz"></div>');
+	  gridLines += '<div class="horiz"></div>';
 	}
+  overlay.append(gridLines);
 
 	// vertical grid
 	overlay.append($('<div class="vert-container"></div>'));
@@ -124,9 +126,11 @@ var hashgrid = function(set) {
 
 	// 30 is an arbitrarily large number...
 	// can't calculate the margin width properly
+  var gridVert = '';
 	for (i = 0; i < 30; i++) {
-		overlayVert.append('<div class="vert">&nbsp;</div>');
+    gridVert += '<div class="vert">&nbsp;</div>';
 	}
+  overlayVert.append(gridVert);
 
 	overlayVert.children()
 		.height(pageHeight)
