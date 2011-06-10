@@ -1,7 +1,7 @@
 /**
  * hashgrid (jQuery version)
  * http://github.com/dotjay/hashgrid
- * Version 5, 3 Nov 2010
+ * Version 6, 10 Jun 2011
  * Written by Jon Gibbins at Analog, http://analog.coop/
  *
  * Contibutors:
