@@ -2,10 +2,15 @@
  * hashgrid (jQuery version)
  * http://github.com/dotjay/hashgrid
  * Version 5, 3 Nov 2010
- * Written by Jon Gibbins, dotjay.co.uk, accessibility.co.uk
+ * Written by Jon Gibbins at Analog, http://analog.coop/
+ *
  * Contibutors:
- * Sean Coates, seancoates.com
- * Phil Dokas, jetless.org
+ * Sean Coates, http://seancoates.com/
+ * Phil Dokas, http://jetless.org/
+ * Andrew Jaswa, http://andrewjaswa.com/
+ *
+ * License:
+ * http://www.apache.org/licenses/LICENSE-2.0.html
  *
  * // Using a basic #grid setup
  * var grid = new hashgrid();

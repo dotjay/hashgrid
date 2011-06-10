@@ -13,5 +13,8 @@ Notes on installation and usage can be found in the included index.htm file.
 
 ## License ##
 
-Released under a Creative Commons Attribution-Share Alike License, which essentially means that you’re free to copy it and adapt it. Get in touch if you need a different license.
+Released under an Apache License (Version 2.0), which essentially means that you're free to copy, modify and distribute it for any project so long as you provide clear attribution to Analog.
+http://www.apache.org/licenses/LICENSE-2.0.html
 
+Contact us if you need a different license.
+http://analog.coop/
