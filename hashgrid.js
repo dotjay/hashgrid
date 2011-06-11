@@ -8,17 +8,34 @@
  * Sean Coates, http://seancoates.com/
  * Phil Dokas, http://jetless.org/
  * Andrew Jaswa, http://andrewjaswa.com/
+ */
+
+/**
+ * @license Copyright 2011 Analog Coop Limited
  *
- * License:
- * http://www.apache.org/licenses/LICENSE-2.0.html
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * // Using a basic #grid setup
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Usage
+ *
+ * // The basic #grid setup looks like this
  * var grid = new hashgrid();
  *
- * // Using #grid with a custom id (e.g. #mygrid)
+ * // Or you can set a custom id for your grid, e.g. #mygrid
  * var grid = new hashgrid("mygrid");
  *
- * // Using #grid with additional options
+ * // But there are a whole bunch of additional options you can set
  * var grid = new hashgrid({
  *     id: 'mygrid',            // id for the grid container
  *     modifierKey: 'alt',      // optional 'ctrl', 'alt' or 'shift'
@@ -31,6 +48,12 @@
  *     cookiePrefix: 'mygrid'   // prefix for the cookie name
  * });
  */
+
+
+/**
+ * Make sure we have the library
+ * TODO: Use an adapter
+ */
 if (typeof jQuery == "undefined") {
 	alert("Hashgrid: jQuery not loaded. Make sure it's linked to your pages.");
 }
@@ -38,6 +61,7 @@ if (typeof jQuery == "undefined") {
 
 /**
  * hashgrid overlay
+ * @constructor
  */
 var hashgrid = function(set) {
 
