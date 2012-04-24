@@ -185,7 +185,7 @@ var hashgrid = function(set) {
 	// Check for saved state
 	overlayCookie = readCookie(options.cookiePrefix + options.id);
 	if (typeof overlayCookie == 'string') {
-		state = overlayCookie.split(',');
+		state = overlayCookie.split('-');
 		state[2] = Number(state[2]);
 		if ((typeof state[2] == 'number') && !isNaN(state[2])) {
 			classNumber = state[2].toFixed(0);
@@ -242,7 +242,7 @@ var hashgrid = function(set) {
 	}
 
 	function saveState() {
-		createCookie(options.cookiePrefix + options.id, (sticky ? '1' : '0') + ',' + overlayZState + ',' + classNumber, 1);
+		createCookie(options.cookiePrefix + options.id, (sticky ? '1' : '0') + '-' + overlayZState + '-' + classNumber, 1);
 	}
 
 	function showOverlay() {
