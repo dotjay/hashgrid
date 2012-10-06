@@ -13,7 +13,7 @@ Notes on installation and usage can be found in the included index.htm file.
 
 ## License ##
 
-Copyright 2011 Analog Coop Limited
+Copyright 2012 Jon Gibbins
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
