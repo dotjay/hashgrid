@@ -244,9 +244,9 @@ text-transform: uppercase;
 
 <div id="content" role="main">
 
-<h1>#grid <em>v7</em></h1>
+<h1>#grid <em>v8</em></h1>
 
-<p class="summary"><em>Sat, 11 Jun 2011<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
+<p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
 
 <h2>Download</h2>
 <p id="download"><a href="http://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="http://github.com/dotjay/hashgrid">GitHub</a></p>
@@ -382,10 +382,19 @@ text-transform: uppercase;
 
 <h2 id="release-notes">Release Notes</h2>
 <dl>
+<dt>v8&#8201;&#8212;&#8201;6 Oct 2012</dt>
+<dd>
+<ul>
+<li>Grid overlay can now be used inside a wrapping container with <code>position: relative;</code> rather than working inside the whole viewport. Thanks to <a href="http://www.tomarnold.de/">Tom Arnold</a>.</li>
+<li>Holding down the #grid keys will no longer make browsers cry. Thanks to <a href="http://lynx.io/">Callum Macrae</a>.</li>
+<li>Fixes to cookie handling. Thanks to <a href="http://loonypandora.co.uk/">James Aitken</a>.</li>
+<li>Optimisations</li>
+</ul>
+</dd>
 <dt>v7&#8201;&#8212;&#8201;11 Jun 2011</dt>
 <dd>Minor release: Updated license references.</dd>
 <dt>v6&#8201;&#8212;&#8201;10 Jun 2011</dt>
-<dd>Minor release: Optimisations, and now released under an Apache License.</dd>
+<dd>Minor release: Optimisations (thanks to <a href="http://andrewjaswa.com/">Andrew Jaswa</a> for contributions), and now released under an Apache License.</dd>
 <dt>v5&#8201;&#8212;&#8201;3 Nov 2010</dt>
 <dd>
 <ul>
@@ -399,7 +408,13 @@ text-transform: uppercase;
 <dt>v3&#8201;&#8212;&#8201;22 Feb 2010</dt>
 <dd>Multiple grids can be set up and cycled through at a key press. To avoid keyboard shortcut conflicts, the default keys have been changed (see <a href="#usage">Usage</a>). Using <span class="key">CTRL</span>, <span class="key">ALT</span> or <span class="key">SHIFT</span> as a modifier key is now optional. Keys no longer show or affect the grid while typing in forms.</dd>
 <dt>v2&#8201;&#8212;&#8201;2 Feb 2010</dt>
-<dd>Keys are now more easily configured (see top of hashgrid.js). Renamed the GridOverlay object to hashgrid. Fixed crash when using with disabled CSS.</dd>
+<dd>
+<ul>
+<li>Keys are now more easily configured (see top of hashgrid.js).</li>
+<li>Fixed crash when using with disabled CSS.</li>
+<li>Renamed the GridOverlay object to hashgrid.</li>
+</ul>
+</dd>
 <dt>v1&#8201;&#8212;&#8201;21 Dec 2009</dt>
 <dd>First release.</dd>
 </dl>
