@@ -76,6 +76,7 @@ var hashgrid = function(set) {
 			classPrefix: 'grid-',   // prefix for the grid classes
 			cookiePrefix: 'hashgrid'// prefix for the cookie name
 		},
+		alreadyDown,
 		classNumber = 1,
 		gridLines,
 		gridWidth,
@@ -262,7 +263,7 @@ var hashgrid = function(set) {
 	 * Event handlers
 	 */
 
-	var alreadyDown = {};
+	alreadyDown = {};
 
 	function keydownHandler(e) {
 		var k,
@@ -284,7 +285,7 @@ var hashgrid = function(set) {
 		}
 
 		if (alreadyDown[k]) {
-			return;
+			return true;
 		}
 		alreadyDown[k] = true;
 
