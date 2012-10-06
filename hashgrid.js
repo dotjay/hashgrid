@@ -1,13 +1,16 @@
 /**
- * hashgrid (jQuery version)
+ * hashgrid (jQuery version, adapters are on the way)
  * http://github.com/dotjay/hashgrid
- * Version 7, 11 Jun 2011
- * Written by Jon Gibbins at Analog, http://analog.coop/
+ * Version 8, 06 Oct 2012
+ * Written by Jon Gibbins
  *
  * Contibutors:
+ * James Aitken, http://loonypandora.co.uk/
+ * Tom Arnold, http://www.tomarnold.de/
  * Sean Coates, http://seancoates.com/
  * Phil Dokas, http://jetless.org/
  * Andrew Jaswa, http://andrewjaswa.com/
+ * Callum Macrae, http://lynx.io/
  */
 
 /**
