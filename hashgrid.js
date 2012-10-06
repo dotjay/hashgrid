@@ -1,7 +1,7 @@
 /**
  * hashgrid (jQuery version)
  * http://github.com/dotjay/hashgrid
- * Version 6, 10 Jun 2011
+ * Version 7, 11 Jun 2011
  * Written by Jon Gibbins at Analog, http://analog.coop/
  *
  * Contibutors:
@@ -118,7 +118,7 @@ var hashgrid = function(set) {
 		.attr('id', options.id)
 		.css({
 			display: 'none',
-			'pointer-events': 'none'
+			pointerEvents: 'none'
 		});
 	$("body").prepend(overlayEl);
 	overlay = $('#' + options.id);
@@ -136,8 +136,8 @@ var hashgrid = function(set) {
 	// Position off-screen and display to calculate height
 	top = overlay.css("top");
 	overlay.css({
-		top: "-999px",
-		display: "block"
+		top: '-999px',
+		display: 'block'
 	});
 
 	// Calculate the number of grid lines needed
@@ -146,7 +146,7 @@ var hashgrid = function(set) {
 
 	// Hide and reset top
 	overlay.css({
-		display: "none",
+		display: 'none',
 		top: top
 	});
 
@@ -262,6 +262,8 @@ var hashgrid = function(set) {
 	 * Event handlers
 	 */
 
+	var alreadyDown = {};
+
 	function keydownHandler(e) {
 		var k,
 			m,
@@ -280,6 +282,11 @@ var hashgrid = function(set) {
 		if (!k) {
 			return true;
 		}
+
+		if (alreadyDown[k]) {
+			return;
+		}
+		alreadyDown[k] = true;
 
 		switch(k) {
 			case options.showGridKey:
@@ -343,6 +350,7 @@ var hashgrid = function(set) {
 		}
 
 		k = getKey(e);
+		alreadyDown[k] = false;
 
 		if (k && (k == options.showGridKey) && !sticky) {
 			overlay.hide();
