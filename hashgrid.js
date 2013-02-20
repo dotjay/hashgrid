@@ -64,6 +64,7 @@ if (typeof jQuery == "undefined") {
  * @constructor
  */
 var hashgrid = function(set) {
+	var $ = jQuery;
 
 	var options = {
 			id: 'grid',             // id for the grid container
@@ -215,7 +216,7 @@ var hashgrid = function(set) {
 	 */
 
 	function getModifier(e) {
-		if (options.modifierKey == null) return true; // Bypass by default
+		if (options.modifierKey === null) return true; // Bypass by default
 		var m = true;
 		switch(options.modifierKey) {
 			case 'ctrl':
@@ -394,7 +395,7 @@ var hashgrid = function(set) {
 				c = c.substring(1, c.length);
 			}
 
-			if (c.indexOf(nameEQ) == 0) {
+			if (c.indexOf(nameEQ) === 0) {
 				return c.substring(nameEQ.length, c.length);
 			}
 		}
@@ -426,7 +427,7 @@ var hashgrid = function(set) {
  * You can call hashgrid from your own code, but it's loaded here as
  * an example for your convenience.
  */
-$(document).ready(function() {
+jQuery(document).ready(function() {
 
 	var grid = new hashgrid({
 		numberOfGrids: 2
