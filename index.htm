@@ -117,7 +117,7 @@ background: Gainsboro;
 border-left: 5px solid DarkGray;
 }
 #javascript-code{
-height: 180px;
+height: 280px;
 }
 #css-code{
 height: 1300px;
@@ -244,7 +244,7 @@ text-transform: uppercase;
 
 <div id="content" role="main">
 
-<h1>#grid <em>v8</em></h1>
+<h1>#grid <em>v9</em></h1>
 
 <p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
 
@@ -262,9 +262,9 @@ text-transform: uppercase;
 
 <h2 id="installation">Installation</h2>
 <ol>
-<li><h3>Copy the <a href="https://github.com/dotjay/hashgrid/blob/v8/hashgrid.js">hashgrid.js</a> script to your project</h3></li>
+<li><h3>Copy the <a href="https://github.com/dotjay/hashgrid/blob/v9/hashgrid.js">hashgrid.js</a> script to your project</h3></li>
 <li><h3>Add the script to your page(s) just inside the <code>&#60;/body&#62;</code> tag</h3>
-<textarea id="javascript-code" cols="68" rows="8" readonly="readonly">
+<textarea id="javascript-code" cols="68" rows="14" readonly="readonly">
 
 &#60;!-- Grab latest version of jQuery --&#62;
 &#60;script type="text/javascript"
@@ -272,7 +272,12 @@ text-transform: uppercase;
 &#60;/script&#62;
 
 &#60;!-- Include the hashgrid script --&#62;
-&#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;</textarea></li>
+&#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
+
+&#60;!-- Kick hashgrid into action --&#62;
+&#60;script type="text/javascript"&#62;
+var grid = new hashgrid({ numberOfGrids: 2 });
+&#60;/script&#62;</textarea></li>
 <li><h3>Add the CSS to your page(s)</h3>
 <textarea id="css-code" cols="68" rows="64" readonly="readonly">
 
@@ -382,6 +387,8 @@ text-transform: uppercase;
 
 <h2 id="release-notes">Release Notes</h2>
 <dl>
+<dt>v9&#8201;&#8212;&#8201;30 May 2013</dt>
+<dd>Minor release: Improved example usage to avoid conflicts.</dd>
 <dt>v8&#8201;&#8212;&#8201;6 Oct 2012</dt>
 <dd>
 <ul>
@@ -455,6 +462,11 @@ limitations under the License.</p>
 
 <!-- Include the hashgrid script -->
 <script type="text/javascript" src="hashgrid.js"></script>
+
+<!-- Kick hashgrid into action -->
+<script type="text/javascript">
+var grid = new hashgrid({ numberOfGrids: 2 });
+</script>
 
 </body>
 

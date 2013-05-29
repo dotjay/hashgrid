@@ -1,7 +1,7 @@
 /**
  * hashgrid (jQuery version, adapters are on the way)
  * http://github.com/dotjay/hashgrid
- * Version 8, 06 Oct 2012
+ * Version 9, 30 May 2013
  * Written by Jon Gibbins
  *
  * Contibutors:
@@ -420,16 +420,3 @@ var hashgrid = function(set) {
 
 	return {};
 };
-
-
-/**
- * You can call hashgrid from your own code, but it's loaded here as
- * an example for your convenience.
- */
-$(document).ready(function() {
-
-	var grid = new hashgrid({
-		numberOfGrids: 2
-	});
-
-});
