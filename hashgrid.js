@@ -64,6 +64,7 @@ if (typeof jQuery == "undefined") {
  * @constructor
  */
 var hashgrid = function(set) {
+	var $ = jQuery;
 
 	var options = {
 			id: 'grid',             // id for the grid container
@@ -215,7 +216,7 @@ var hashgrid = function(set) {
 	 */
 
 	function getModifier(e) {
-		if (options.modifierKey == null) return true; // Bypass by default
+		if (options.modifierKey === null) return true; // Bypass by default
 		var m = true;
 		switch(options.modifierKey) {
 			case 'ctrl':
@@ -394,7 +395,7 @@ var hashgrid = function(set) {
 				c = c.substring(1, c.length);
 			}
 
-			if (c.indexOf(nameEQ) == 0) {
+			if (c.indexOf(nameEQ) === 0) {
 				return c.substring(nameEQ.length, c.length);
 			}
 		}
