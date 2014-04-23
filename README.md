@@ -9,7 +9,15 @@ A little tool that inserts a layout grid in web pages, allows you to hold it in 
  * Set keyboard shortcuts to show and hide the grid, hold it in place, toggle it to the foreground and background, and jump between multiple grids
  * Uses a single JavaScript file and a little CSS to control the grid lines, columns and gutters
 
-Notes on installation and usage can be found in the included index.htm file.
+## Install ##
+
+Download the latest release from:
+https://github.com/dotjay/hashgrid/releases
+
+Install using [Bower](http://bower.io/):
+```bower install hashgrid#v9```
+
+Notes on usage can be found at [hashgrid.com#installation](http://hashgrid.com/#installation).
 
 ## License ##
 
