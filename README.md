@@ -11,6 +11,14 @@ A little tool that inserts a layout grid in web pages, allows you to hold it in 
 
 Notes on installation and usage can be found in the included index.htm file.
 
+## Install ##
+
+Download the latest release from:
+https://github.com/dotjay/hashgrid/releases
+
+Install using [Bower](http://bower.io/):
+```bower install hashgrid#v9```
+
 ## License ##
 
 Copyright 2013 Analog Coop Limited
