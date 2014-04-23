@@ -19,6 +19,14 @@ Install using [Bower](http://bower.io/):
 
 Notes on usage can be found at [hashgrid.com#installation](http://hashgrid.com/#installation).
 
+## Install ##
+
+Download the latest release from:
+https://github.com/dotjay/hashgrid/releases
+
+Install using [Bower](http://bower.io/):
+```bower install hashgrid#v9```
+
 ## License ##
 
 Copyright 2013 Analog Coop Limited
