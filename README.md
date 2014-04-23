@@ -12,6 +12,7 @@ A little tool that inserts a layout grid in web pages, allows you to hold it in 
 ## Install ##
 
 Download the latest release from:
+
 https://github.com/dotjay/hashgrid/releases
 
 Install using [Bower](http://bower.io/):
@@ -20,14 +21,6 @@ bower install hashgrid#v9
 ```
 
 Notes on usage can be found at [hashgrid.com#installation](http://hashgrid.com/#installation).
-
-## Install ##
-
-Download the latest release from:
-https://github.com/dotjay/hashgrid/releases
-
-Install using [Bower](http://bower.io/):
-```bower install hashgrid#v9```
 
 ## License ##
 
