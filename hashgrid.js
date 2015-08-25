@@ -251,7 +251,7 @@ var hashgrid = function(set) {
 		overlay.show();
 		overlayVert.css({width: overlay.width()});
 		// hide any vertical blocks that aren't at the top of the viewport
-		overlayVert.children('.vert').each(function () {
+		overlayVert.find('.vert').each(function () {
 			var vCol = $(this);
 			vCol.css('display','inline-block');
 			if (vCol.offset().top > vCol.parent().offset().top) {
