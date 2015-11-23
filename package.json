@@ -1,0 +1,19 @@
+{
+  "name": "hashgrid",
+  "version": "9.0.0",
+  "description": "A little tool that inserts a layout grid in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background.",
+  "main": "hashgrid.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/widatama/hashgrid.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/widatama/hashgrid/issues"
+  },
+  "homepage": "https://github.com/widatama/hashgrid#readme"
+}
