@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/widatama/hashgrid/issues"
   },
-  "homepage": "https://github.com/widatama/hashgrid#readme"
+  "homepage": "https://github.com/widatama/hashgrid#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "hihat": "^2.5.0",
+    "load-grunt-config": "^0.19.0",
+    "tap-dev-tool": "^1.3.0",
+    "tape": "^4.2.2"
+  }
 }
