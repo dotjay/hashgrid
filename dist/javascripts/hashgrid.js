@@ -95,11 +95,11 @@
         return CookieStorage;
     }();
     if (typeof module != "undefined" && module.exports) module.exports = CookieStorage;
-    var LocalStorage = function() {
-        function LocalStorage() {
-            this.storage = window.localStorage;
+    var SessionStorage = function() {
+        function SessionStorage() {
+            this.storage = window.sessionStorage;
         }
-        LocalStorage.prototype.read = function(dataLabel) {
+        SessionStorage.prototype.read = function(dataLabel) {
             var dataValue = this.storage.getItem(dataLabel);
             if (dataValue) {
                 return JSON.parse(dataValue);
@@ -107,11 +107,11 @@
                 return null;
             }
         };
-        LocalStorage.prototype.write = function(dataLabel, dataValue) {
+        SessionStorage.prototype.write = function(dataLabel, dataValue) {
             this.storage.setItem(dataLabel, JSON.stringify(dataValue));
             return dataValue;
         };
-        LocalStorage.prototype.remove = function(dataLabel) {
+        SessionStorage.prototype.remove = function(dataLabel) {
             var removedDataValue = this.read(dataLabel);
             if (removedDataValue) {
                 this.storage.removeItem(dataLabel);
@@ -120,23 +120,23 @@
                 return null;
             }
         };
-        return LocalStorage;
+        return SessionStorage;
     }();
-    if (typeof module != "undefined" && module.exports) module.exports = LocalStorage;
+    if (typeof module != "undefined" && module.exports) module.exports = SessionStorage;
     if (typeof module != "undefined" && module.exports) {
-        var LocalStorage = require("./localStorage");
+        var SessionStorage = require("./sessionStorage");
         var CookieStorage = require("./cookieStorage");
     }
     var Storage = function() {
-        if (this.hasLocalStorage()) {
-            return new LocalStorage();
+        if (this.hasSessionStorage()) {
+            return new SessionStorage();
         } else {
             return new CookieStorage();
         }
     };
-    Storage.prototype.hasLocalStorage = function() {
+    Storage.prototype.hasSessionStorage = function() {
         try {
-            var storage = window.localStorage, someData = "some value";
+            var storage = window.sessionStorage, someData = "some value";
             storage.setItem(someData, someData);
             storage.removeItem(someData);
             return true;

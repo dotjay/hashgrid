@@ -17,7 +17,7 @@ https://github.com/dotjay/hashgrid/releases
 
 Install using [Bower](http://bower.io/):
 ```
-bower install hashgrid#v9
+bower install hashgrid#v10
 ```
 
 Notes on usage can be found at [hashgrid.com#installation](http://hashgrid.com/#installation).

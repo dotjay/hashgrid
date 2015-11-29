@@ -1,7 +1,7 @@
 srcFiles = [
   "<%= srcDir %>/helper.js",
   "<%= srcDir %>/cookieStorage.js",
-  "<%= srcDir %>/localStorage.js",
+  "<%= srcDir %>/sessionStorage.js",
   "<%= srcDir %>/storage.js",
   "<%= srcDir %>/hashgrid.js"
 ];
