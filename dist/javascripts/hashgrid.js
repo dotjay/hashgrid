@@ -172,12 +172,14 @@
             this.state.overlayOn = false;
             this.state.overlayZIndex = "B";
             this.state.isKeyDown = {};
+            this.state.gridNumber = 1;
             this.init();
         }
         Hashgrid.prototype.init = function() {
             var storageData;
             this.overlay = document.createElement("div");
             this.overlay.id = this.options.id;
+            this.overlay.classList.add(this.options.classPrefix + this.state.gridNumber);
             this.overlay.style.display = "none";
             this.overlay.style.pointerEvents = "none";
             this.overlay.style.height = document.body.scrollHeight + "px";
@@ -195,6 +197,11 @@
             fillGrid.call(this);
             storageData = storage.read(this.options.storagePrefix + this.options.id);
             if (storageData) {
+                if (storageData.gridNumber) {
+                    this.overlay.classList.remove(this.options.classPrefix + this.state.gridNumber);
+                    this.overlay.classList.add(this.options.classPrefix + storageData.gridNumber);
+                    this.state.gridNumber = storageData.gridNumber;
+                }
                 if (storageData.overlayHold) {
                     this.overlay.style.display = "block";
                     this.state.overlayOn = true;
@@ -219,13 +226,6 @@
         };
         Hashgrid.prototype.destroy = function() {
             this.overlay.remove();
-            if (document.removeEventListener) {
-                document.removeEventListener("keydown", keydownHandler, false);
-                document.removeEventListener("keyup", keyupHandler, false);
-            } else if (document.detachEvent) {
-                document.detachEvent("onkeydown", keydownHandler);
-                document.detachEvent("onkeyup", keyupHandler);
-            }
         };
         fillGrid = function() {
             var columnContainer = document.createElement("div"), column = document.createElement("div"), columnCount, columnWidth, docFragment = document.createDocumentFragment(), options = this.options, overlay = this.overlay, overlayHeight, overlayWidth, rowContainer = document.createElement("div"), row = document.createElement("div"), rowCount, rowHeight;
@@ -316,6 +316,19 @@
                 break;
 
               case options.jumpGridsKey:
+                if (state.overlayOn && options.numberOfGrids > 1) {
+                    this.overlay.classList.remove(options.classPrefix + state.gridNumber);
+                    state.gridNumber += 1;
+                    if (state.gridNumber > options.numberOfGrids) {
+                        state.gridNumber = 1;
+                    }
+                    this.overlay.classList.add(options.classPrefix + state.gridNumber);
+                    this.showOverlay();
+                    if (/webkit/.test(navigator.userAgent.toLowerCase())) {
+                        Helper.forceRepaint();
+                    }
+                    storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+                }
                 break;
             }
             return true;
@@ -336,6 +349,7 @@
         createStorageData = function() {
             var state = this.state;
             return {
+                gridNumber: state.gridNumber,
                 overlayHold: state.overlayHold,
                 overlayZIndex: state.overlayZIndex
             };

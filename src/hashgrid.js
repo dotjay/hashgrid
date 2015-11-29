@@ -70,6 +70,7 @@ var Hashgrid = (function() {
     this.state.overlayOn = false;
     this.state.overlayZIndex = "B";
     this.state.isKeyDown = {};
+    this.state.gridNumber = 1;
 
     this.init();
   }
@@ -83,6 +84,7 @@ var Hashgrid = (function() {
     // Create overlay, hidden before adding to DOM
     this.overlay = document.createElement("div");
     this.overlay.id = this.options.id;
+    this.overlay.classList.add(this.options.classPrefix + this.state.gridNumber);
     this.overlay.style.display = "none";
     this.overlay.style.pointerEvents = "none";
     this.overlay.style.height = document.body.scrollHeight + "px";
@@ -96,6 +98,7 @@ var Hashgrid = (function() {
     document.body.insertBefore(this.overlay, document.body.firstChild);
 
     // Add keyboard events listener
+    // TODO: Find a way to add event handler that is bindable and removable
     if(document.addEventListener) {
       document.addEventListener("keydown", keydownHandler.bind(this), false);
       document.addEventListener("keyup", keyupHandler.bind(this), false);
@@ -109,7 +112,14 @@ var Hashgrid = (function() {
 
     storageData = storage.read(this.options.storagePrefix + this.options.id);
 
+    // TODO: Improve storage and state management
     if(storageData) {
+      if(storageData.gridNumber) {
+        this.overlay.classList.remove(this.options.classPrefix + this.state.gridNumber);
+        this.overlay.classList.add(this.options.classPrefix + storageData.gridNumber);
+        this.state.gridNumber = storageData.gridNumber;
+      }
+
       if(storageData.overlayHold) {
         this.overlay.style.display = "block";
         this.state.overlayOn = true;
@@ -141,15 +151,15 @@ var Hashgrid = (function() {
   Hashgrid.prototype.destroy = function() {
     this.overlay.remove();
 
-    // Remove keyboard events listener
-    if(document.removeEventListener) {
-      document.removeEventListener("keydown", keydownHandler, false);
-      document.removeEventListener("keyup", keyupHandler, false);
-    }
-    else if(document.detachEvent){
-      document.detachEvent("onkeydown", keydownHandler);
-      document.detachEvent("onkeyup", keyupHandler);
-    }
+    // Remove keyboard events listener (these does not work)
+    //if(document.removeEventListener) {
+      //document.removeEventListener("keydown", keydownHandler, false);
+      //document.removeEventListener("keyup", keyupHandler, false);
+    //}
+    //else if(document.detachEvent){
+      //document.detachEvent("onkeydown", keydownHandler);
+      //document.detachEvent("onkeyup", keyupHandler);
+    //}
   };
 
 
@@ -266,16 +276,19 @@ var Hashgrid = (function() {
           this.hideOverlay();
           state.overlayOn = false;
           state.overlayHold = false;
+
           storage.write(options.storagePrefix + options.id, createStorageData.call(this));
         }
         break;
       case options.holdGridKey:
         if(state.overlayOn && !state.overlayHold) {
           state.overlayHold = true;
+
           storage.write(options.storagePrefix + options.id, createStorageData.call(this));
         }
         break;
       case options.foregroundKey:
+        // TODO: Turn into instance method
         if(state.overlayOn) {
           if(this.overlay.style.zIndex === options.overlayZFG) {
             this.overlay.style.zIndex = options.overlayZBG;
@@ -285,10 +298,30 @@ var Hashgrid = (function() {
             this.overlay.style.zIndex = options.overlayZFG;
             state.overlayZIndex = "F";
           }
+
           storage.write(options.storagePrefix + options.id, createStorageData.call(this));
         }
         break;
       case options.jumpGridsKey:
+        // TODO: Turn into instance method
+        if(state.overlayOn && options.numberOfGrids > 1) {
+          // Cycle through available grids
+          this.overlay.classList.remove(options.classPrefix + state.gridNumber);
+          state.gridNumber += 1;
+
+          if(state.gridNumber > options.numberOfGrids) {
+            state.gridNumber = 1;
+          }
+
+          this.overlay.classList.add(options.classPrefix + state.gridNumber);
+          this.showOverlay();
+
+          if (/webkit/.test( navigator.userAgent.toLowerCase() )) {
+            Helper.forceRepaint();
+          }
+
+          storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+        }
         break;
     }
 
@@ -321,6 +354,7 @@ var Hashgrid = (function() {
   createStorageData = function() {
     var state = this.state;
     return {
+      gridNumber: state.gridNumber,
       overlayHold: state.overlayHold,
       overlayZIndex: state.overlayZIndex
     };

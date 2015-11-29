@@ -161,6 +161,7 @@ text-transform: uppercase;
   top: 0;
   left: 50%;
   margin-left: -490px;
+  overflow: hidden;
 }
 
 .hashgrid-column-container {
@@ -186,7 +187,6 @@ text-transform: uppercase;
   float: left;
 }
 
-
 /**
  * Horizontal grid lines, defined by your base line height
  *
@@ -201,6 +201,32 @@ text-transform: uppercase;
   padding: 0;
 }
 
+/**
+* Classes for multiple grids
+*
+* When using more than one grid, remember to set the numberOfGrids
+* option when instantiating hashgrid.
+* e.g.
+*
+*  var hg = new Hashgrid({
+*    numberOfGrids: 2
+*  });
+*/
+#hashgrid.hashgrid2,
+#hashgrid.hashgrid2 .hashgrid-column-container{
+  /* Container width adjustments */
+  padding: 0 160px;
+  width: 660px;
+}
+
+#hashgrid.hashgrid2 .hashgrid__column{
+  /* Vertical grid line colour for grid 2 */
+  border-color: crimson;
+}
+
+
+
+
 </style>
 
 </head>
@@ -209,9 +235,9 @@ text-transform: uppercase;
 
 <div id="content" role="main">
 
-<h1>#grid <em>v9</em></h1>
+<h1>#grid <em>v10</em></h1>
 
-<p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">g</span> on your keyboard.</p>
+<p class="summary"><em>Mon, 30 Nov 2015<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">g</span> on your keyboard.</p>
 
 <h2>Download</h2>
 <p id="download"><a href="https://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="https://github.com/dotjay/hashgrid">GitHub</a></p>
@@ -253,6 +279,7 @@ var grid = new hashgrid({ numberOfGrids: 2 });
   top: 0;
   left: 50%;
   margin-left: -490px;
+  overflow: hidden;
 }
 
 .hashgrid-column-container {
@@ -278,7 +305,6 @@ var grid = new hashgrid({ numberOfGrids: 2 });
   float: left;
 }
 
-
 /**
  * Horizontal grid lines, defined by your base line height
  *
@@ -293,6 +319,28 @@ var grid = new hashgrid({ numberOfGrids: 2 });
   padding: 0;
 }
 
+/**
+* Classes for multiple grids
+*
+* When using more than one grid, remember to set the numberOfGrids
+* option when instantiating hashgrid.
+* e.g.
+*
+*  var hg = new Hashgrid({
+*    numberOfGrids: 2
+*  });
+*/
+#hashgrid.hashgrid2,
+#hashgrid.hashgrid2 .hashgrid-column-container{
+  /* Container width adjustments */
+  padding: 0 160px;
+  width: 660px;
+}
+
+#hashgrid.hashgrid2 .hashgrid__column{
+  /* Vertical grid line colour for grid 2 */
+  border-color: crimson;
+}
 </textarea></li>
 <li><h3>Modify #grid to suit your needs</h3>
 <p>The CSS and JavaScript is annotated to help you.</p></li>
@@ -391,7 +439,9 @@ limitations under the License.</p>
 
 <!-- Kick hashgrid into action -->
 <script>
-var hg = new Hashgrid();
+var hg = new Hashgrid({
+  numberOfGrids: 2
+});
 </script>
 
 </body>
