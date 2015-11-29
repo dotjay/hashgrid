@@ -5,22 +5,22 @@
 */
 
 if (typeof module!='undefined' && module.exports) {
-  var LocalStorage = require("./localStorage");
+  var SessionStorage = require("./sessionStorage");
   var CookieStorage = require("./cookieStorage");
 }
 
 var Storage = function() {
-  if(this.hasLocalStorage()) {
-    return new LocalStorage();
+  if(this.hasSessionStorage()) {
+    return new SessionStorage();
   }
   else {
     return new CookieStorage();
   }
 };
 
-Storage.prototype.hasLocalStorage = function() {
+Storage.prototype.hasSessionStorage = function() {
   try {
-    var storage = window.localStorage,
+    var storage = window.sessionStorage,
         someData = "some value";
 
     storage.setItem(someData, someData);

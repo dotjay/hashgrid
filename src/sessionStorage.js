@@ -1,10 +1,10 @@
-var LocalStorage = (function() {
+var SessionStorage = (function() {
 
-  function LocalStorage() {
-    this.storage = window.localStorage;
+  function SessionStorage() {
+    this.storage = window.sessionStorage;
   }
 
-  LocalStorage.prototype.read = function(dataLabel) {
+  SessionStorage.prototype.read = function(dataLabel) {
     var dataValue = this.storage.getItem(dataLabel);
 
     if(dataValue) {
@@ -15,12 +15,12 @@ var LocalStorage = (function() {
     }
   };
 
-  LocalStorage.prototype.write = function(dataLabel, dataValue) {
+  SessionStorage.prototype.write = function(dataLabel, dataValue) {
     this.storage.setItem(dataLabel, JSON.stringify(dataValue));
     return dataValue;
   };
 
-  LocalStorage.prototype.remove = function(dataLabel) {
+  SessionStorage.prototype.remove = function(dataLabel) {
     var removedDataValue = this.read(dataLabel);
 
     if(removedDataValue) {
@@ -32,8 +32,8 @@ var LocalStorage = (function() {
     }
   };
 
-  return LocalStorage;
+  return SessionStorage;
 
 })();
 
-if (typeof module!="undefined" && module.exports) module.exports = LocalStorage;
+if (typeof module!="undefined" && module.exports) module.exports = SessionStorage;

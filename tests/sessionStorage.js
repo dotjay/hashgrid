@@ -1,12 +1,12 @@
 var tape = require("tape");
-var LocalStorage = require("../src/localStorage");
+var SessionStorage = require("../src/sessionStorage");
 
-tape("Local Storage module", function(assert) {
-  var storage = new LocalStorage();
+tape("Session Storage module", function(assert) {
+  var storage = new SessionStorage();
   var dataLabel = "label";
   var dataValue = "value";
 
-  window.localStorage.clear();
+  window.sessionStorage.clear();
 
   assert.equal(storage.read(dataLabel), null, "Data reading returns null if data value is not set");
 
