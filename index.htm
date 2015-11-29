@@ -211,7 +211,7 @@ text-transform: uppercase;
 
 <h1>#grid <em>v9</em></h1>
 
-<p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
+<p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">g</span> on your keyboard.</p>
 
 <h2>Download</h2>
 <p id="download"><a href="https://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="https://github.com/dotjay/hashgrid">GitHub</a></p>
@@ -228,13 +228,8 @@ text-transform: uppercase;
 <h2 id="installation">Installation</h2>
 <ol>
 <li><h3>Copy the <a href="https://github.com/dotjay/hashgrid/blob/v9/hashgrid.js">hashgrid.js</a> script to your project</h3></li>
-<li><h3>Add the script to your page(s) just inside the <code>&#60;/body&#62;</code> tag</h3>
+<li><h3>Add this script to your page(s) just before the closing <code>&#60;/body&#62;</code> tag</h3>
 <textarea id="javascript-code" cols="68" rows="14" readonly="readonly">
-
-&#60;!-- Grab latest version of jQuery --&#62;
-&#60;script type="text/javascript"
-  src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"&#62;
-&#60;/script&#62;
 
 &#60;!-- Include the hashgrid script --&#62;
 &#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
@@ -249,23 +244,23 @@ var grid = new hashgrid({ numberOfGrids: 2 });
 /**
  * Grid
  */
-#grid{
+#hashgrid{
+  /* Spreads the whole page by default, adjust to match your container */
+  /*width: 100%;*/
+  width: 980px;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -490px;
+}
 
-    /* Dimensions - same width as your grid with gutters */
-    width: 980px;
-
-    /* Grid (left-aligned)
-    position: absolute;
-    top: 0;
-    left: 0;
-    */
-
-    /* Grid (centered) */
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -490px;
-
+.hashgrid-column-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 /**
@@ -274,19 +269,13 @@ var grid = new hashgrid({ numberOfGrids: 2 });
  * Set the column width taking the borders into consideration,
  * and use margins to set column gutters.
  */
-#grid div.vert{
-
-    width: 139px;
-    border: solid darkturquoise;
-    border-width: 0 1px;
-    margin-right: 19px;
-
-}
-
-#grid div.vert.first-line{
-
-    margin-left: 19px;
-
+.hashgrid__column{
+  width: 139px;
+  border: solid darkturquoise;
+  border-width: 0 1px;
+  margin-left: 19px;
+  height: 100%;
+  float: left;
 }
 
 
@@ -296,41 +285,14 @@ var grid = new hashgrid({ numberOfGrids: 2 });
  * Remember, the CSS properties that define the box model:
  * visible height = height + borders + margins + padding
  */
-#grid div.horiz{
-
-    /* 20px line height */
-    height: 19px;
-    border-bottom: 1px dotted darkgray;
-    margin: 0;
-    padding: 0;
-
+.hashgrid__row{
+  /* 20px line height */
+  height: 19px;
+  border-bottom: 1px dotted darkgray;
+  margin: 0;
+  padding: 0;
 }
 
-/**
-* Classes for multiple grids
-*
-* When using more than one grid, remember to set the numberOfGrids
-* option in the hashgrid.js file.
-*/
-#grid.grid-1 div.vert{
-
-    /* Vertical grid line colour for grid 1 */
-    border-color: darkturquoise;
-
-}
-#grid.grid-2{
-
-    /* Adjustments */
-    padding: 0 160px;
-    width: 660px;
-
-}
-#grid.grid-2 div.vert{
-
-    /* Vertical grid line colour for grid 2 */
-    border-color: crimson;
-
-}
 </textarea></li>
 <li><h3>Modify #grid to suit your needs</h3>
 <p>The CSS and JavaScript is annotated to help you.</p></li>
@@ -339,19 +301,21 @@ var grid = new hashgrid({ numberOfGrids: 2 });
 <h2 id="usage">Usage</h2>
 <p>The document must have keyboard focus for #grid to work. You may need to click on the document background or <span class="key">TAB</span> into the page first.</p>
 <dl>
-<dt><span class="key">G</span></dt>
+<dt><span class="key">g</span></dt>
 <dd>Show the grid until you release.</dd>
-<dt><span class="key">G</span> + <span class="key">H</span></dt>
-<dd>Show and hold the grid (<span class="key">G</span> will remove it again).</dd>
-<dt><span class="key">G</span> + <span class="key">F</span></dt>
-<dd>Toggle the grid to the foreground and back. Pressing <span class="key">F</span> while the grid is held also works.</dd>
-<dt><span class="key">G</span> + <span class="key">J</span></dt>
-<dd>Jump to the next grid. Pressing <span class="key">J</span> while the grid is held also works.</dd>
+<dt><span class="key">g</span> + <span class="key">h</span></dt>
+<dd>Show and hold the grid (<span class="key">g</span> will remove it again).</dd>
+<dt><span class="key">g</span> + <span class="key">f</span></dt>
+<dd>Toggle the grid to the foreground and back. Pressing <span class="key">f</span> while the grid is held also works.</dd>
+<dt><span class="key">g</span> + <span class="key">j</span></dt>
+<dd>Jump to the next grid. Pressing <span class="key">j</span> while the grid is held also works.</dd>
 </dl>
-<p><em>N.B. A cookie conveniently remembers the state of the grid when you refresh the page. While the grid is in front, you will not be able to interact with the page except in Chrome v4, Safari v4, Firefox v3.6, or more recent versions.</em></p>
+<p><em>N.B. Hashgrid remembers the state of the grid when you refresh the page. While the grid is in front, you will not be able to interact with the page except in Chrome v4, Safari v4, Firefox v3.6, or more recent versions.</em></p>
 
 <h2 id="release-notes">Release Notes</h2>
 <dl>
+<dt>v10&#8201;&#8212;&#8201;30 Nov 2015</dt>
+<dd>jQuery is no longer required.</dd>
 <dt>v9&#8201;&#8212;&#8201;30 May 2013</dt>
 <dd>Minor release: Improved example usage to avoid conflicts.</dd>
 <dt>v8&#8201;&#8212;&#8201;6 Oct 2012</dt>
@@ -425,13 +389,9 @@ limitations under the License.</p>
 <!-- Include the hashgrid script -->
 <script type="text/javascript" src="dist/javascripts/hashgrid.js"></script>
 
-<script>
-  hg = new Hashgrid();
-</script>
-
 <!-- Kick hashgrid into action -->
-<script type="text/javascript">
-var grid = new hashgrid({ numberOfGrids: 2 });
+<script>
+var hg = new Hashgrid();
 </script>
 
 </body>
