@@ -16,7 +16,6 @@ font-family: Arial, sans-serif;
 background: White;
 color: DimGray;
 margin: 0;
-padding: 0 20px;
 }
 #content{
 font-size: 16px;
@@ -153,23 +152,23 @@ text-transform: uppercase;
 /**
  * Grid
  */
-#grid{
+#hashgrid{
+  /* Spreads the whole page by default, adjust to match your container */
+  /*width: 100%;*/
+  width: 980px;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -490px;
+}
 
-    /* Dimensions - same width as your grid with gutters */
-    width: 980px;
-
-    /* Grid (left-aligned)
-    position: absolute;
-    top: 0;
-    left: 0;
-    */
-
-    /* Grid (centered) */
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -490px;
-
+.hashgrid-column-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 /**
@@ -178,19 +177,13 @@ text-transform: uppercase;
  * Set the column width taking the borders into consideration,
  * and use margins to set column gutters.
  */
-#grid div.vert{
-
-    width: 139px;
-    border: solid darkturquoise;
-    border-width: 0 1px;
-    margin-right: 19px;
-
-}
-
-#grid div.vert.first-line{
-
-    margin-left: 19px;
-
+.hashgrid__column{
+  width: 139px;
+  border: solid darkturquoise;
+  border-width: 0 1px;
+  margin-left: 19px;
+  height: 100%;
+  float: left;
 }
 
 
@@ -200,40 +193,12 @@ text-transform: uppercase;
  * Remember, the CSS properties that define the box model:
  * visible height = height + borders + margins + padding
  */
-#grid div.horiz{
-
-    /* 20px line height */
-    height: 19px;
-    border-bottom: 1px dotted darkgray;
-    margin: 0;
-    padding: 0;
-
-}
-
-/**
-* Classes for multiple grids
-*
-* When using more than one grid, remember to set the numberOfGrids 
-* option in the hashgrid.js file.
-*/
-#grid.grid-1 div.vert{
-
-    /* Vertical grid line colour for grid 1 */
-    border-color: darkturquoise;
-
-}
-#grid.grid-2{
-
-    /* Adjustments */
-    padding: 0 160px;
-    width: 660px;
-
-}
-#grid.grid-2 div.vert{
-
-    /* Vertical grid line colour for grid 2 */
-    border-color: crimson;
-
+.hashgrid__row{
+  /* 20px line height */
+  height: 19px;
+  border-bottom: 1px dotted darkgray;
+  margin: 0;
+  padding: 0;
 }
 
 </style>
@@ -344,7 +309,7 @@ var grid = new hashgrid({ numberOfGrids: 2 });
 /**
 * Classes for multiple grids
 *
-* When using more than one grid, remember to set the numberOfGrids 
+* When using more than one grid, remember to set the numberOfGrids
 * option in the hashgrid.js file.
 */
 #grid.grid-1 div.vert{
@@ -457,11 +422,12 @@ limitations under the License.</p>
 
 </div>
 
-<!-- Grab latest version of jQuery -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-
 <!-- Include the hashgrid script -->
-<script type="text/javascript" src="hashgrid.js"></script>
+<script type="text/javascript" src="dist/javascripts/hashgrid.js"></script>
+
+<script>
+  hg = new Hashgrid();
+</script>
 
 <!-- Kick hashgrid into action -->
 <script type="text/javascript">
