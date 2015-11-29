@@ -16,11 +16,32 @@ Download the latest release from:
 https://github.com/dotjay/hashgrid/releases
 
 Install using [Bower](http://bower.io/):
-```
+```bash
 bower install hashgrid#v10
 ```
 
 Notes on usage can be found at [hashgrid.com#installation](http://hashgrid.com/#installation).
+
+## Development ##
+
+Install dependencies
+```bash
+npm install
+```
+
+Run tests
+```bash
+npm test
+```
+
+Build for production
+```bash
+# This will build hashgrid into dist folder
+grunt
+
+# This will build hashgrid and then turn on the watcher for auto building
+grunt dev
+```
 
 ## License ##
 
