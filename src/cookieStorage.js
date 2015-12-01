@@ -5,6 +5,7 @@
 */
 
 var CookieStorage = (function() {
+  "use strict";
 
   function CookieStorage() {
 

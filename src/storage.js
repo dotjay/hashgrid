@@ -11,28 +11,34 @@ if (typeof module!='undefined' && module.exports) {
 }
 // REMOVE END //
 
-var Storage = function() {
-  if(this.hasSessionStorage()) {
-    return new SessionStorage();
-  }
-  else {
-    return new CookieStorage();
-  }
-};
+var Storage = (function() {
+  "use strict";
 
-Storage.prototype.hasSessionStorage = function() {
-  try {
-    var storage = window.sessionStorage,
+  function Storage() {
+    if(this.hasSessionStorage()) {
+      return new SessionStorage();
+    }
+    else {
+      return new CookieStorage();
+    }
+  }
+
+  Storage.prototype.hasSessionStorage = function() {
+    try {
+      var storage = window.sessionStorage,
         someData = "some value";
 
-    storage.setItem(someData, someData);
-    storage.removeItem(someData);
-    return true;
-  }
-  catch(e) {
-    return false;
-  }
-};
+      storage.setItem(someData, someData);
+      storage.removeItem(someData);
+      return true;
+    }
+    catch(e) {
+      return false;
+    }
+  };
+
+  return Storage;
+})();
 
 // REMOVE START //
 if (typeof module!="undefined" && module.exports) module.exports = Storage;

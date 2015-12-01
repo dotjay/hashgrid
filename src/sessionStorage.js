@@ -1,4 +1,5 @@
 var SessionStorage = (function() {
+  "use strict";
 
   function SessionStorage() {
     this.storage = window.sessionStorage;

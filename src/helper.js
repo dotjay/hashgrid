@@ -1,5 +1,6 @@
 
 var Helper = (function() {
+  "use strict";
 
   function copyObjectProperties(target, source) {
     var properties = Object.getOwnPropertyNames(source);
