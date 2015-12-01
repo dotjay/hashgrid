@@ -1,9 +1,9 @@
-srcFiles = [
-  "<%= srcDir %>/helper.js",
-  "<%= srcDir %>/cookieStorage.js",
-  "<%= srcDir %>/sessionStorage.js",
-  "<%= srcDir %>/storage.js",
-  "<%= srcDir %>/hashgrid.js"
+var srcFiles = [
+  "<%= tempDir %>/helper.js",
+  "<%= tempDir %>/cookieStorage.js",
+  "<%= tempDir %>/sessionStorage.js",
+  "<%= tempDir %>/storage.js",
+  "<%= tempDir %>/hashgrid.js"
 ];
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     enclose: {
       "window": "window",
       "document": "document"
-    }
+    },
   },
 
   normal: {

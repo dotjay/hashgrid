@@ -55,7 +55,6 @@
             }
         };
     }();
-    if (typeof module != "undefined" && module.exports) module.exports = Helper;
     var CookieStorage = function() {
         function CookieStorage() {}
         CookieStorage.prototype.read = function(cookieLabel) {
@@ -94,7 +93,6 @@
         };
         return CookieStorage;
     }();
-    if (typeof module != "undefined" && module.exports) module.exports = CookieStorage;
     var SessionStorage = function() {
         function SessionStorage() {
             this.storage = window.sessionStorage;
@@ -122,11 +120,6 @@
         };
         return SessionStorage;
     }();
-    if (typeof module != "undefined" && module.exports) module.exports = SessionStorage;
-    if (typeof module != "undefined" && module.exports) {
-        var SessionStorage = require("./sessionStorage");
-        var CookieStorage = require("./cookieStorage");
-    }
     var Storage = function() {
         if (this.hasSessionStorage()) {
             return new SessionStorage();
@@ -144,11 +137,6 @@
             return false;
         }
     };
-    if (typeof module != "undefined" && module.exports) module.exports = Storage;
-    if (typeof module != "undefined" && module.exports) {
-        var Storage = require("./storage");
-        var Helper = require("./helper");
-    }
     var Hashgrid = function() {
         var storage = new Storage();
         function Hashgrid(customOptions) {
@@ -357,5 +345,4 @@
         return Hashgrid;
     }();
     window.Hashgrid = Hashgrid;
-    if (typeof module != "undefined" && module.exports) module.exports = Hashgrid;
 })(window, document);

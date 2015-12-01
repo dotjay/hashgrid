@@ -91,4 +91,6 @@ var Helper = (function() {
 })();
 
 
+// REMOVE START //
 if (typeof module!="undefined" && module.exports) module.exports = Helper;
+// REMOVE END //

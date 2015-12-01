@@ -71,4 +71,6 @@ var CookieStorage = (function() {
 })();
 
 
+// REMOVE START //
 if (typeof module!="undefined" && module.exports) module.exports = CookieStorage;
+// REMOVE END //

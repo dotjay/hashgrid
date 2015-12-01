@@ -36,4 +36,6 @@ var SessionStorage = (function() {
 
 })();
 
+// REMOVE START //
 if (typeof module!="undefined" && module.exports) module.exports = SessionStorage;
+// REMOVE END //

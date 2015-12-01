@@ -32,10 +32,12 @@
  * });
  */
 
+// REMOVE START //
 if (typeof module!="undefined" && module.exports) {
   var Storage = require("./storage");
   var Helper = require("./helper");
 }
+// REMOVE END //
 
 var Hashgrid = (function() {
 
@@ -367,4 +369,6 @@ var Hashgrid = (function() {
 
 window.Hashgrid = Hashgrid;
 
+// REMOVE START //
 if (typeof module!="undefined" && module.exports) module.exports = Hashgrid;
+// REMOVE END //

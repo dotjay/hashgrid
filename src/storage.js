@@ -4,10 +4,12 @@
  * cookie storage is provided only as fallback
 */
 
+// REMOVE START //
 if (typeof module!='undefined' && module.exports) {
   var SessionStorage = require("./sessionStorage");
   var CookieStorage = require("./cookieStorage");
 }
+// REMOVE END //
 
 var Storage = function() {
   if(this.hasSessionStorage()) {
@@ -32,4 +34,6 @@ Storage.prototype.hasSessionStorage = function() {
   }
 };
 
+// REMOVE START //
 if (typeof module!="undefined" && module.exports) module.exports = Storage;
+// REMOVE END //
