@@ -66,13 +66,13 @@ var Hashgrid = (function() {
     // Apply options
     this.options = Helper.mergeObjects(defaultOptions, customOptions, privateOptions);
 
-    this.state = {};
-
-    this.state.overlayHold = false;
-    this.state.overlayOn = false;
-    this.state.overlayZIndex = "B";
-    this.state.isKeyDown = {};
-    this.state.gridNumber = 1;
+    this.state = {
+      overlayHold: false,
+      overlayOn: false,
+      overlayZIndex: "B",
+      isKeyDown: {},
+      gridNumber: 1
+    };
 
     this.init();
   }
@@ -135,6 +135,7 @@ var Hashgrid = (function() {
         else if(storageData.overlayZIndex === "F"){
           this.overlay.style.zIndex = this.options.overlayZFG;
         }
+        this.state.overlayZIndex = storageData.overlayZIndex;
       }
     }
 
