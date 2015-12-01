@@ -40,10 +40,19 @@ if (typeof module!="undefined" && module.exports) {
 // REMOVE END //
 
 var Hashgrid = (function() {
+  "use strict";
 
-  var storage = new Storage();
+  var
+    storage = new Storage(),
+    fillGrid,
+    boundKeydownHandler,
+    keydownHandler,
+    boundKeyupHandler,
+    keyupHandler,
+    createStorageData;
 
   // Constructor
+
   function Hashgrid(customOptions) {
 
     var
@@ -100,14 +109,16 @@ var Hashgrid = (function() {
     document.body.insertBefore(this.overlay, document.body.firstChild);
 
     // Add keyboard events listener
-    // TODO: Find a way to add event handler that is bindable and removable
+    boundKeydownHandler = keydownHandler.bind(this);
+    boundKeyupHandler = keyupHandler.bind(this);
+
     if(document.addEventListener) {
-      document.addEventListener("keydown", keydownHandler.bind(this), false);
-      document.addEventListener("keyup", keyupHandler.bind(this), false);
+      document.addEventListener("keydown", boundKeydownHandler, false);
+      document.addEventListener("keyup", boundKeyupHandler, false);
     }
     else if(document.attachEvent){
-      document.attachEvent("onkeydown", keydownHandler.bind(this));
-      document.attachEvent("onkeyup", keyupHandler.bind(this));
+      document.attachEvent("onkeydown", boundKeydownHandler);
+      document.attachEvent("onkeyup", boundKeyupHandler);
     }
 
     fillGrid.call(this);
@@ -152,21 +163,25 @@ var Hashgrid = (function() {
   };
 
   Hashgrid.prototype.destroy = function() {
+    // Remove grid container
     this.overlay.remove();
 
-    // Remove keyboard events listener (these does not work)
-    //if(document.removeEventListener) {
-      //document.removeEventListener("keydown", keydownHandler, false);
-      //document.removeEventListener("keyup", keyupHandler, false);
-    //}
-    //else if(document.detachEvent){
-      //document.detachEvent("onkeydown", keydownHandler);
-      //document.detachEvent("onkeyup", keyupHandler);
-    //}
+    // Remove storage data
+    storage.remove(this.options.storagePrefix + this.options.id);
+
+    // Remove keyboard events listener
+    if(document.removeEventListener) {
+      document.removeEventListener("keydown", boundKeydownHandler);
+      document.removeEventListener("keyup", boundKeyupHandler);
+    }
+    else if(document.detachevent){
+      document.detachEvent("onkeydown", boundKeydownHandler);
+      document.detachEvent("onkeyup", boundKeyupHandler);
+    }
   };
 
 
-  // Helper functions
+  // Private helper functions
 
   fillGrid = function() {
     var
@@ -245,8 +260,8 @@ var Hashgrid = (function() {
     var
       k,
       m,
-      options = this.options;
-      state = this.state;
+      options = this.options,
+      state = this.state,
       source = event.target.tagName.toLowerCase();
 
     if ((source == 'input') || (source == 'textarea') || (source == 'select')) {

@@ -1,5 +1,6 @@
 (function(window, document) {
     var Helper = function() {
+        "use strict";
         function copyObjectProperties(target, source) {
             var properties = Object.getOwnPropertyNames(source);
             var propertyLength = properties.length;
@@ -56,6 +57,7 @@
         };
     }();
     var CookieStorage = function() {
+        "use strict";
         function CookieStorage() {}
         CookieStorage.prototype.read = function(cookieLabel) {
             var cookieCrumb, cookieArray = document.cookie.split(";"), i = 0, cookieCrumbCount = cookieArray.length;
@@ -94,6 +96,7 @@
         return CookieStorage;
     }();
     var SessionStorage = function() {
+        "use strict";
         function SessionStorage() {
             this.storage = window.sessionStorage;
         }
@@ -121,24 +124,29 @@
         return SessionStorage;
     }();
     var Storage = function() {
-        if (this.hasSessionStorage()) {
-            return new SessionStorage();
-        } else {
-            return new CookieStorage();
+        "use strict";
+        function Storage() {
+            if (this.hasSessionStorage()) {
+                return new SessionStorage();
+            } else {
+                return new CookieStorage();
+            }
         }
-    };
-    Storage.prototype.hasSessionStorage = function() {
-        try {
-            var storage = window.sessionStorage, someData = "some value";
-            storage.setItem(someData, someData);
-            storage.removeItem(someData);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    };
+        Storage.prototype.hasSessionStorage = function() {
+            try {
+                var storage = window.sessionStorage, someData = "some value";
+                storage.setItem(someData, someData);
+                storage.removeItem(someData);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        };
+        return Storage;
+    }();
     var Hashgrid = function() {
-        var storage = new Storage();
+        "use strict";
+        var storage = new Storage(), fillGrid, boundKeydownHandler, keydownHandler, boundKeyupHandler, keyupHandler, createStorageData;
         function Hashgrid(customOptions) {
             var defaultOptions = {
                 id: "hashgrid",
@@ -176,12 +184,14 @@
                 this.overlay.style.zIndex = this.overlayZBackground;
             }
             document.body.insertBefore(this.overlay, document.body.firstChild);
+            boundKeydownHandler = keydownHandler.bind(this);
+            boundKeyupHandler = keyupHandler.bind(this);
             if (document.addEventListener) {
-                document.addEventListener("keydown", keydownHandler.bind(this), false);
-                document.addEventListener("keyup", keyupHandler.bind(this), false);
+                document.addEventListener("keydown", boundKeydownHandler, false);
+                document.addEventListener("keyup", boundKeyupHandler, false);
             } else if (document.attachEvent) {
-                document.attachEvent("onkeydown", keydownHandler.bind(this));
-                document.attachEvent("onkeyup", keyupHandler.bind(this));
+                document.attachEvent("onkeydown", boundKeydownHandler);
+                document.attachEvent("onkeyup", boundKeyupHandler);
             }
             fillGrid.call(this);
             storageData = storage.read(this.options.storagePrefix + this.options.id);
@@ -216,6 +226,14 @@
         };
         Hashgrid.prototype.destroy = function() {
             this.overlay.remove();
+            storage.remove(this.options.storagePrefix + this.options.id);
+            if (document.removeeventlistener) {
+                document.removeeventlistener("keydown", boundKeydownHandler, false);
+                document.removeeventlistener("keyup", boundKeyupHandler, false);
+            } else if (document.detachevent) {
+                document.detachevent("onkeydown", boundKeydownHandler);
+                document.detachevent("onkeyup", boundKeyupHandler);
+            }
         };
         fillGrid = function() {
             var columnContainer = document.createElement("div"), column = document.createElement("div"), columnCount, columnWidth, docFragment = document.createDocumentFragment(), options = this.options, overlay = this.overlay, overlayHeight, overlayWidth, rowContainer = document.createElement("div"), row = document.createElement("div"), rowCount, rowHeight;
@@ -254,9 +272,7 @@
             columnContainer.appendChild(docFragment);
         };
         keydownHandler = function(event) {
-            var k, m, options = this.options;
-            state = this.state;
-            source = event.target.tagName.toLowerCase();
+            var k, m, options = this.options, state = this.state, source = event.target.tagName.toLowerCase();
             if (source == "input" || source == "textarea" || source == "select") {
                 return true;
             }
