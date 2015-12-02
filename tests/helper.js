@@ -81,12 +81,16 @@ tape("Helper module", function(assert) {
   assert.test("Keyboard event helper", function(assert) {
     assert.plan(2);
 
-    document.addEventListener("keydown", function(event) {
+    var keydownHandler = function(event) {
       assert.equal(Helper.getKey(event), keyCode, "Event keyCode obtained");
       assert.ok(Helper.getKeyModifier(event, keyModifier), "Event keyModifier obtained");
-    });
+    };
+
+    document.addEventListener("keydown", keydownHandler);
 
     document.documentElement.dispatchEvent(kbdEvent);
+
+    document.removeEventListener("keydown", keydownHandler);
   });
 
 
