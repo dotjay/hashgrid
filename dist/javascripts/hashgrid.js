@@ -227,12 +227,12 @@
         Hashgrid.prototype.destroy = function() {
             this.overlay.remove();
             storage.remove(this.options.storagePrefix + this.options.id);
-            if (document.removeeventlistener) {
-                document.removeeventlistener("keydown", boundKeydownHandler, false);
-                document.removeeventlistener("keyup", boundKeyupHandler, false);
+            if (document.removeEventListener) {
+                document.removeEventListener("keydown", boundKeydownHandler);
+                document.removeEventListener("keyup", boundKeyupHandler);
             } else if (document.detachevent) {
-                document.detachevent("onkeydown", boundKeydownHandler);
-                document.detachevent("onkeyup", boundKeyupHandler);
+                document.detachEvent("onkeydown", boundKeydownHandler);
+                document.detachEvent("onkeyup", boundKeyupHandler);
             }
         };
         fillGrid = function() {

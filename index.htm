@@ -116,10 +116,10 @@ background: Gainsboro;
 border-left: 5px solid DarkGray;
 }
 #javascript-code{
-height: 280px;
+height: 320px;
 }
 #css-code{
-height: 1300px;
+height: 1580px;
 }
 .summary em{
 font-style: normal;
@@ -202,16 +202,16 @@ text-transform: uppercase;
 }
 
 /**
-* Classes for multiple grids
-*
-* When using more than one grid, remember to set the numberOfGrids
-* option when instantiating hashgrid.
-* e.g.
-*
-*  var hg = new Hashgrid({
-*    numberOfGrids: 2
-*  });
-*/
+ * Classes for multiple grids
+ *
+ * When using more than one grid, remember to set the numberOfGrids
+ * option when instantiating hashgrid.
+ * e.g.
+ *
+ *  var hg = new Hashgrid({
+ *    numberOfGrids: 2
+ *  });
+ */
 #hashgrid.hashgrid2,
 #hashgrid.hashgrid2 .hashgrid-column-container{
   /* Container width adjustments */
@@ -255,14 +255,21 @@ text-transform: uppercase;
 <ol>
 <li><h3>Copy the <a href="https://github.com/dotjay/hashgrid/blob/v9/hashgrid.js">hashgrid.js</a> script to your project</h3></li>
 <li><h3>Add this script to your page(s) just before the closing <code>&#60;/body&#62;</code> tag</h3>
-<textarea id="javascript-code" cols="68" rows="14" readonly="readonly">
+<textarea id="javascript-code" cols="68" rows="15" readonly="readonly">
 
 &#60;!-- Include the hashgrid script --&#62;
 &#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
 
 &#60;!-- Kick hashgrid into action --&#62;
 &#60;script type="text/javascript"&#62;
-var grid = new hashgrid({ numberOfGrids: 2 });
+var grid = new Hashgrid({ numberOfGrids: 2 });
+&#60;/script&#62;
+
+&#60;!-- Note: Use window onload if your css is not inlined --&#62;
+&#60;script type="text/javascript"&#62;
+window.addEventListener("load", function(event) {
+  var grid = new Hashgrid({ numberOfGrids: 2 });
+});
 &#60;/script&#62;</textarea></li>
 <li><h3>Add the CSS to your page(s)</h3>
 <textarea id="css-code" cols="68" rows="64" readonly="readonly">
@@ -271,7 +278,10 @@ var grid = new hashgrid({ numberOfGrids: 2 });
  * Grid
  */
 #hashgrid{
-  /* Spreads the whole page by default, adjust to match your container */
+  /*
+   * Spreads the whole page by default
+   * Adjust to match your container
+   */
   /*width: 100%;*/
   width: 980px;
   position: absolute;
@@ -320,16 +330,16 @@ var grid = new hashgrid({ numberOfGrids: 2 });
 }
 
 /**
-* Classes for multiple grids
-*
-* When using more than one grid, remember to set the numberOfGrids
-* option when instantiating hashgrid.
-* e.g.
-*
-*  var hg = new Hashgrid({
-*    numberOfGrids: 2
-*  });
-*/
+ * Classes for multiple grids
+ *
+ * When using more than one grid, remember to set the numberOfGrids
+ * option when instantiating hashgrid.
+ * e.g.
+ *
+ *  var hg = new Hashgrid({
+ *    numberOfGrids: 2
+ *  });
+ */
 #hashgrid.hashgrid2,
 #hashgrid.hashgrid2 .hashgrid-column-container{
   /* Container width adjustments */
