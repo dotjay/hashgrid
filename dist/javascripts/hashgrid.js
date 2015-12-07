@@ -236,7 +236,7 @@
             }
         };
         fillGrid = function() {
-            var columnContainer = document.createElement("div"), column = document.createElement("div"), columnCount, columnWidth, docFragment = document.createDocumentFragment(), options = this.options, overlay = this.overlay, overlayHeight, overlayWidth, rowContainer = document.createElement("div"), row = document.createElement("div"), rowCount, rowHeight;
+            var columnContainer = document.createElement("div"), column = document.createElement("div"), columnCount = 0, columnWidth, docFragment = document.createDocumentFragment(), options = this.options, overlay = this.overlay, overlayHeight, overlayWidth, rowContainer = document.createElement("div"), row = document.createElement("div"), rowCount = 0, rowHeight;
             rowContainer.classList.add(options.id + "-row-container");
             columnContainer.classList.add(options.id + "-column-container");
             overlay.appendChild(rowContainer);
@@ -253,23 +253,31 @@
             columnWidth = column.clientWidth;
             overlay.style.display = "none";
             overlay.top = "0";
-            if (!rowHeight || !columnWidth) {
+            if (!rowHeight && !columnWidth) {
                 return false;
             }
-            rowCount = Math.floor(overlayHeight / rowHeight) - 1;
-            columnCount = Math.floor(overlayWidth / columnWidth) - 2;
-            while (rowCount--) {
-                row = document.createElement("div");
-                row.classList.add(options.id + "__row");
-                docFragment.appendChild(row);
+            if (rowHeight) {
+                rowCount = Math.floor(overlayHeight / rowHeight) - 1;
+                while (rowCount--) {
+                    row = document.createElement("div");
+                    row.classList.add(options.id + "__row");
+                    docFragment.appendChild(row);
+                }
+                rowContainer.appendChild(docFragment);
+            } else {
+                rowContainer.remove(row);
             }
-            rowContainer.appendChild(docFragment);
-            while (columnCount--) {
-                column = document.createElement("div");
-                column.classList.add(options.id + "__column");
-                docFragment.appendChild(column);
+            if (columnWidth) {
+                columnCount = Math.floor(overlayWidth / columnWidth) - 2;
+                while (columnCount--) {
+                    column = document.createElement("div");
+                    column.classList.add(options.id + "__column");
+                    docFragment.appendChild(column);
+                }
+                columnContainer.appendChild(docFragment);
+            } else {
+                columnContainer.remove(column);
             }
-            columnContainer.appendChild(docFragment);
         };
         keydownHandler = function(event) {
             var k, m, options = this.options, state = this.state, source = event.target.tagName.toLowerCase();

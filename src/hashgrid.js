@@ -187,7 +187,7 @@ var Hashgrid = (function() {
     var
       columnContainer = document.createElement("div"),
       column = document.createElement("div"),
-      columnCount,
+      columnCount = 0,
       columnWidth,
       docFragment = document.createDocumentFragment(),
       options = this.options,
@@ -196,7 +196,7 @@ var Hashgrid = (function() {
       overlayWidth,
       rowContainer = document.createElement("div"),
       row = document.createElement("div"),
-      rowCount,
+      rowCount = 0,
       rowHeight;
 
     // Row and column container
@@ -228,32 +228,46 @@ var Hashgrid = (function() {
     overlay.style.display = "none";
     overlay.top = "0";
 
-    if(!rowHeight || !columnWidth) {
+    if(!rowHeight && !columnWidth) {
       return false;
     }
 
-    // Calculate rows and columns needed
-    rowCount = Math.floor(overlayHeight / rowHeight) - 1;
-    columnCount = Math.floor(overlayWidth / columnWidth) - 2;
+    if(rowHeight) {
+      // Calculate rows needed
+      rowCount = Math.floor(overlayHeight / rowHeight) - 1;
 
-    // Fill them in
-    while(rowCount--) {
-      row = document.createElement("div");
-      row.classList.add(options.id + "__row");
+      // Fill the rows
+      while(rowCount--) {
+        row = document.createElement("div");
+        row.classList.add(options.id + "__row");
 
-      docFragment.appendChild(row);
+        docFragment.appendChild(row);
+      }
+
+      rowContainer.appendChild(docFragment);
+    }
+    else {
+      rowContainer.remove(row);
     }
 
-    rowContainer.appendChild(docFragment);
+    if(columnWidth) {
+      // Calculate columns needed
+      columnCount = Math.floor(overlayWidth / columnWidth) - 2;
 
-    while(columnCount--) {
-      column = document.createElement("div");
-      column.classList.add(options.id + "__column");
+      // Fill the columns
+      while(columnCount--) {
+        column = document.createElement("div");
+        column.classList.add(options.id + "__column");
 
-      docFragment.appendChild(column);
+        docFragment.appendChild(column);
+      }
+
+      columnContainer.appendChild(docFragment);
+    }
+    else {
+      columnContainer.remove(column);
     }
 
-    columnContainer.appendChild(docFragment);
   };
 
   keydownHandler = function(event) {
