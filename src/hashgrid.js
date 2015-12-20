@@ -33,8 +33,8 @@
  */
 
 // REMOVE START //
-if (typeof module!="undefined" && module.exports) {
-  var Storage = require("./storage");
+if (typeof module != "undefined" && module.exports) {
+  var SimpleStorage = require("./storage");
   var Helper = require("./helper");
 }
 // REMOVE END //
@@ -43,7 +43,7 @@ var Hashgrid = (function() {
   "use strict";
 
   var
-    storage = new Storage(),
+    storage = new SimpleStorage(),
     fillGrid,
     boundKeydownHandler,
     keydownHandler,
@@ -278,7 +278,7 @@ var Hashgrid = (function() {
       state = this.state,
       source = event.target.tagName.toLowerCase();
 
-    if ((source == 'input') || (source == 'textarea') || (source == 'select')) {
+    if ((source == "input") || (source == "textarea") || (source == "select")) {
       return true;
     }
 
@@ -299,62 +299,62 @@ var Hashgrid = (function() {
     state.isKeyDown[k] = true;
 
     switch(k) {
-      case options.showGridKey:
-        if(!state.overlayOn) {
-          this.showOverlay();
-          state.overlayOn = true;
+    case options.showGridKey:
+      if(!state.overlayOn) {
+        this.showOverlay();
+        state.overlayOn = true;
+      }
+      else if(state.overlayHold) {
+        this.hideOverlay();
+        state.overlayOn = false;
+        state.overlayHold = false;
+
+        storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+      }
+      break;
+    case options.holdGridKey:
+      if(state.overlayOn && !state.overlayHold) {
+        state.overlayHold = true;
+
+        storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+      }
+      break;
+    case options.foregroundKey:
+      // TODO: Turn into instance method
+      if(state.overlayOn) {
+        if(this.overlay.style.zIndex === options.overlayZFG) {
+          this.overlay.style.zIndex = options.overlayZBG;
+          state.overlayZIndex = "B";
         }
-        else if(state.overlayHold) {
-          this.hideOverlay();
-          state.overlayOn = false;
-          state.overlayHold = false;
-
-          storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+        else {
+          this.overlay.style.zIndex = options.overlayZFG;
+          state.overlayZIndex = "F";
         }
-        break;
-      case options.holdGridKey:
-        if(state.overlayOn && !state.overlayHold) {
-          state.overlayHold = true;
 
-          storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+        storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+      }
+      break;
+    case options.jumpGridsKey:
+      // TODO: Turn into instance method
+      if(state.overlayOn && options.numberOfGrids > 1) {
+        // Cycle through available grids
+        this.overlay.classList.remove(options.classPrefix + state.gridNumber);
+        state.gridNumber += 1;
+
+        if(state.gridNumber > options.numberOfGrids) {
+          state.gridNumber = 1;
         }
-        break;
-      case options.foregroundKey:
-        // TODO: Turn into instance method
-        if(state.overlayOn) {
-          if(this.overlay.style.zIndex === options.overlayZFG) {
-            this.overlay.style.zIndex = options.overlayZBG;
-            state.overlayZIndex = "B";
-          }
-          else {
-            this.overlay.style.zIndex = options.overlayZFG;
-            state.overlayZIndex = "F";
-          }
 
-          storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+        this.overlay.classList.add(options.classPrefix + state.gridNumber);
+        this.showOverlay();
+
+        if (/webkit/.test( navigator.userAgent.toLowerCase() )) {
+          Helper.forceRepaint();
         }
-        break;
-      case options.jumpGridsKey:
-        // TODO: Turn into instance method
-        if(state.overlayOn && options.numberOfGrids > 1) {
-          // Cycle through available grids
-          this.overlay.classList.remove(options.classPrefix + state.gridNumber);
-          state.gridNumber += 1;
 
-          if(state.gridNumber > options.numberOfGrids) {
-            state.gridNumber = 1;
-          }
-
-          this.overlay.classList.add(options.classPrefix + state.gridNumber);
-          this.showOverlay();
-
-          if (/webkit/.test( navigator.userAgent.toLowerCase() )) {
-            Helper.forceRepaint();
-          }
-
-          storage.write(options.storagePrefix + options.id, createStorageData.call(this));
-        }
-        break;
+        storage.write(options.storagePrefix + options.id, createStorageData.call(this));
+      }
+      break;
     }
 
     return true;

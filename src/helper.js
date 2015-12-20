@@ -19,7 +19,7 @@ var Helper = (function() {
     getKey: function(event) {
       var k = false, c = (event.keyCode ? event.keyCode : event.which);
       // Handle keywords
-      if (c == 13) k = 'enter';
+      if (c == 13) k = "enter";
       // Handle letters
       else k = String.fromCharCode(c).toLowerCase();
       return k;
@@ -29,16 +29,16 @@ var Helper = (function() {
       if (modifierOption === null) return true; // Bypass by default
       var m = true;
       switch(modifierOption) {
-        case 'ctrl':
-          m = (event.ctrlKey ? event.ctrlKey : false);
+      case "ctrl":
+        m = (event.ctrlKey ? event.ctrlKey : false);
         break;
 
-        case 'alt':
-          m = (event.altKey ? event.altKey : false);
+      case "alt":
+        m = (event.altKey ? event.altKey : false);
         break;
 
-        case 'shift':
-          m = (event.shiftKey ? event.shiftKey : false);
+      case "shift":
+        m = (event.shiftKey ? event.shiftKey : false);
         break;
       }
       return m;
@@ -82,10 +82,12 @@ var Helper = (function() {
       var ss = document.styleSheets[0];
 
       try {
-        ss.addRule('.xxxxxx', 'position: relative');
+        ss.addRule(".xxxxxx", "position: relative");
         ss.removeRule(ss.rules.length - 1);
       }
-      catch(e) {}
+      catch(e) {
+        return;
+      }
     }
   };
 
