@@ -52,7 +52,9 @@
                 try {
                     ss.addRule(".xxxxxx", "position: relative");
                     ss.removeRule(ss.rules.length - 1);
-                } catch (e) {}
+                } catch (e) {
+                    return;
+                }
             }
         };
     }();
@@ -100,53 +102,53 @@
         function SessionStorage() {
             this.storage = window.sessionStorage;
         }
-        SessionStorage.prototype.read = function(dataLabel) {
-            var dataValue = this.storage.getItem(dataLabel);
-            if (dataValue) {
-                return JSON.parse(dataValue);
-            } else {
-                return null;
-            }
-        };
-        SessionStorage.prototype.write = function(dataLabel, dataValue) {
-            this.storage.setItem(dataLabel, JSON.stringify(dataValue));
-            return dataValue;
-        };
-        SessionStorage.prototype.remove = function(dataLabel) {
-            var removedDataValue = this.read(dataLabel);
-            if (removedDataValue) {
-                this.storage.removeItem(dataLabel);
-                return removedDataValue;
-            } else {
-                return null;
-            }
-        };
         return SessionStorage;
     }();
-    var Storage = function() {
+    SessionStorage.prototype.read = function(dataLabel) {
+        var dataValue = this.storage.getItem(dataLabel);
+        if (dataValue) {
+            return JSON.parse(dataValue);
+        } else {
+            return null;
+        }
+    };
+    SessionStorage.prototype.write = function(dataLabel, dataValue) {
+        this.storage.setItem(dataLabel, JSON.stringify(dataValue));
+        return dataValue;
+    };
+    SessionStorage.prototype.remove = function(dataLabel) {
+        var removedDataValue = this.read(dataLabel);
+        if (removedDataValue) {
+            this.storage.removeItem(dataLabel);
+            return removedDataValue;
+        } else {
+            return null;
+        }
+    };
+    var SimpleStorage = function() {
         "use strict";
-        function Storage() {
+        function SimpleStorage() {
             if (this.hasSessionStorage()) {
                 return new SessionStorage();
             } else {
                 return new CookieStorage();
             }
         }
-        Storage.prototype.hasSessionStorage = function() {
-            try {
-                var storage = window.sessionStorage, someData = "some value";
-                storage.setItem(someData, someData);
-                storage.removeItem(someData);
-                return true;
-            } catch (e) {
-                return false;
-            }
-        };
-        return Storage;
+        return SimpleStorage;
     }();
+    SimpleStorage.prototype.hasSessionStorage = function() {
+        try {
+            var storage = window.sessionStorage, someData = "some value";
+            storage.setItem(someData, someData);
+            storage.removeItem(someData);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
     var Hashgrid = function() {
         "use strict";
-        var storage = new Storage(), fillGrid, boundKeydownHandler, keydownHandler, boundKeyupHandler, keyupHandler, createStorageData;
+        var storage = new SimpleStorage(), fillGrid, boundKeydownHandler, keydownHandler, boundKeyupHandler, keyupHandler, createStorageData;
         function Hashgrid(customOptions) {
             var defaultOptions = {
                 id: "hashgrid",

@@ -1,5 +1,5 @@
 var tape = require("tape");
-var Hashgrid = require("../src/hashgrid");
+var Hashgrid = require("../src/javascripts/hashgrid");
 
 function setupDOM() {
   document.body.style.height = "100px";

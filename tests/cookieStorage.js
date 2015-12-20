@@ -1,5 +1,5 @@
 var tape = require("tape");
-var CookieStorage = require("../src/cookieStorage");
+var CookieStorage = require("../src/javascripts/cookieStorage");
 
 tape("Cookie Storage module", function(assert) {
   var storage = new CookieStorage();

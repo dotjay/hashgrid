@@ -1,5 +1,5 @@
 var tape = require("tape");
-var SessionStorage = require("../src/sessionStorage");
+var SessionStorage = require("../src/javascripts/sessionStorage");
 
 tape("Session Storage module", function(assert) {
   var storage = new SessionStorage();

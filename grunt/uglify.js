@@ -11,7 +11,7 @@ module.exports = {
     enclose: {
       "window": "window",
       "document": "document"
-    },
+    }
   },
 
   normal: {
@@ -22,7 +22,7 @@ module.exports = {
     },
 
     files: {
-      "<%= buildDir %>/javascripts/hashgrid.js": srcFiles
+      "<%= buildDir %>/hashgrid.js": srcFiles
     }
   },
 
@@ -33,7 +33,7 @@ module.exports = {
     },
 
     files: {
-      "<%= buildDir %>/javascripts/hashgrid.min.js": srcFiles
+      "<%= buildDir %>/hashgrid.min.js": srcFiles
     }
   }
 };

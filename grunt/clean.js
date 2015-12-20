@@ -4,5 +4,8 @@ module.exports = {
   },
   temp: {
     src: ["<%= tempDir %>"]
+  },
+  demo: {
+    src: ["index.html"]
   }
 };

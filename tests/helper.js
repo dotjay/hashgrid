@@ -1,5 +1,5 @@
 var tape = require("tape");
-var Helper = require("../src/helper");
+var Helper = require("../src/javascripts/helper");
 
 function setupKeyboardEvent(keyCode, keyModifier) {
   // So much for dispatching event, sigh
