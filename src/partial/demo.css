@@ -1,0 +1,137 @@
+/* Putting inline rules here so the document can be downloaded with style */
+
+body{
+font-size: 1em;
+line-height: 1.25;
+font-family: Arial, sans-serif;
+background: White;
+color: DimGray;
+margin: 0;
+}
+#content{
+font-size: 16px;
+line-height: 20px;
+position: relative;
+}
+#content{
+width: 620px;
+margin: 0 auto;
+}
+#footer{
+border-top: 1px dotted DarkGray;
+padding-top: 19px;
+}
+h1, h2{
+color: Black;
+font-weight: normal;
+}
+h1{
+font-size: 36px;
+line-height: 40px;
+margin: 40px 0 20px;
+padding-bottom: 19px;
+border-bottom: 1px dotted DarkGray;
+}
+h1 em{
+font-style: normal;
+color: DarkGray;
+font-size: 16px;
+line-height: 20px;
+margin: 0 0 20px;
+}
+h2, h3{
+font-size: 16px;
+font-weight: 700;
+line-height: 20px;
+margin: 0 0 20px;
+}
+h3{
+font-weight: 300;
+}
+a:link,
+a:visited{
+color: Black;
+text-decoration: none;
+padding: 0 2px;
+background-color: WhiteSmoke;
+border-bottom: 1px solid Gold;
+}
+a:focus{
+outline: none;
+}
+a:focus,
+a:hover,
+a:active{
+background-color: Khaki;
+border-bottom: 1px solid GoldenRod;
+}
+p, ul{
+padding: 0;
+margin: 0 0 20px;
+}
+dl, ol{
+padding: 0;
+margin: 0;
+}
+ul{
+list-style: circle;
+}
+ol li{
+margin-bottom: 20px;
+}
+dd{
+margin: 0 0 20px 0;
+}
+del{
+text-decoration: line-through;
+opacity: 0.75;
+}
+ins{
+text-decoration: none;
+}
+code{
+font-size: 14px;
+line-height: 1;
+}
+textarea{
+font-family: 'Courier New', monospace;
+font-size: 14px;
+line-height: 20px;
+display: block;
+width: 600px;
+margin: 0 0 20px;
+padding: 0 0 0 15px;
+border: 0;
+color: Black;
+background: Gainsboro;
+border-left: 5px solid DarkGray;
+}
+#javascript-code{
+height: 320px;
+}
+#css-code{
+height: 1580px;
+}
+.summary em{
+font-style: normal;
+position: absolute;
+color: DarkGray;
+right: 0;
+top: 18px;
+width: 140px;
+}
+.summary em span{
+position: absolute;
+left: -9999px;
+}
+#download{
+line-height: 60px;
+padding: 0 40px 0 15px;
+border-left: 5px solid DarkGray;
+background: Gainsboro;
+color: DimGray;
+}
+span.key{
+color: Black;
+text-transform: uppercase;
+}
