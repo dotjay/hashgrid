@@ -20,11 +20,11 @@ Install using [Bower](http://bower.io/):
 bower install hashgrid#v9
 ```
 
-Notes on usage can be found at [hashgrid.com#installation](http://hashgrid.com/#installation).
+Notes on usage can be found at [dotjay.github.io/hashgrid/#installation](http://dotjay.github.io/hashgrid/#installation).
 
 ## License ##
 
-Copyright 2013 Analog Coop Limited
+Copyright 2013-2018 Jon Gibbins
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ limitations under the License.
 
 --
 
-This essentially means that you're free to copy, modify and distribute it for any project so long as you provide clear attribution to Analog Coop Limited.
+This essentially means that you're free to copy, modify and distribute it for any project so long as you provide clear attribution to the author.
 
-Contact us if you need a different license.
-http://analog.coop/
+Get in touch if you need a different license.
+https://dotjay.com/contact

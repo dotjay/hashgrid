@@ -1,11 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
+<!doctype html>
+<html lang="en-GB">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <title>#grid</title>
 
-<style type="text/css">
+<style>
 
 /* Putting inline rules here so the document can be downloaded with style */
 
@@ -148,7 +149,7 @@ text-transform: uppercase;
 </style>
 
 <!-- Set styles -->
-<style type="text/css">
+<style>
 
 /**
  * Grid
@@ -213,7 +214,7 @@ text-transform: uppercase;
 /**
 * Classes for multiple grids
 *
-* When using more than one grid, remember to set the numberOfGrids 
+* When using more than one grid, remember to set the numberOfGrids
 * option in the hashgrid.js file.
 */
 #grid.grid-1 div.vert{
@@ -246,7 +247,7 @@ text-transform: uppercase;
 
 <h1>#grid <em>v9</em></h1>
 
-<p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> This is a little tool we created for our <a href="http://analog.coop/">Analog&#160;holding&#160;page</a>. It inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
+<p class="summary"><em>Sat, 6 Oct 2012<span>:</span></em> #grid (or &#8220;Hashgrid&#8221;) is a little tool that inserts a <a href="http://en.wikipedia.org/wiki/Grid_(page_layout)">layout grid</a> in web pages, allows you to hold it in place, and toggle between displaying it in the foreground or background. To see it in action, hit <span class="key">G</span> on your keyboard.</p>
 
 <h2>Download</h2>
 <p id="download"><a href="https://github.com/dotjay/hashgrid/downloads">Download #grid</a> from <a href="https://github.com/dotjay/hashgrid">GitHub</a></p>
@@ -267,15 +268,13 @@ text-transform: uppercase;
 <textarea id="javascript-code" cols="68" rows="14" readonly="readonly">
 
 &#60;!-- Grab latest version of jQuery --&#62;
-&#60;script type="text/javascript"
-  src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"&#62;
-&#60;/script&#62;
+&#60;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"&#62;&#60;/script&#62;
 
 &#60;!-- Include the hashgrid script --&#62;
-&#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
+&#60;script src="hashgrid.js"&#62;&#60;/script&#62;
 
 &#60;!-- Kick hashgrid into action --&#62;
-&#60;script type="text/javascript"&#62;
+&#60;script&#62;
 var grid = new hashgrid({ numberOfGrids: 2 });
 &#60;/script&#62;</textarea></li>
 <li><h3>Add the CSS to your page(s)</h3>
@@ -344,7 +343,7 @@ var grid = new hashgrid({ numberOfGrids: 2 });
 /**
 * Classes for multiple grids
 *
-* When using more than one grid, remember to set the numberOfGrids 
+* When using more than one grid, remember to set the numberOfGrids
 * option in the hashgrid.js file.
 */
 #grid.grid-1 div.vert{
@@ -435,7 +434,7 @@ var grid = new hashgrid({ numberOfGrids: 2 });
 
 <h2 id="license">License</h2>
 
-<p>Copyright 2013 Analog Coop Limited</p>
+<p>Copyright 2013-2018 Jon Gibbins</p>
 
 <p>Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -449,22 +448,22 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</p>
 
-<p>This essentially means that you&#8217;re free to copy, modify and distribute it for any project so long as you provide clear attribution to Analog Coop Limited. <a href="http://analog.coop/#talk-to-us">Contact us</a> if you need a different license.</p>
+<p>This essentially means that you&#8217;re free to copy, modify and distribute it for any project so long as you provide clear attribution to the author. <a href="https://dotjay.com/contact">Get in touch</a> if you need a different license.</p>
 
 <div id="footer" role="contentinfo">
-<p>#grid is an <a href="http://analog.coop/">Analog</a> gig. It was conceived by <a href="http://jontangerine.com/">Jon Tan</a>, and built by <a href="http://accessibility.co.uk/">Jon Gibbins</a>, in cahoots with our <a href="http://analog.coop#is">fine friends</a>. Oh, and the CSS for this page playfully uses <a href="http://www.w3.org/TR/css3-color/#svg-color">SVG colour keywords</a> only.</p>
+<p>#grid was built by <a href="https://dotjay.com/">Jon Gibbins</a> and designed by <a href="http://jontangerine.com/">Jon Tan</a>. Oh, and the CSS for this page playfully uses <a href="http://www.w3.org/TR/css3-color/#svg-color">SVG colour keywords</a> only.</p>
 </div>
 
 </div>
 
 <!-- Grab latest version of jQuery -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 
 <!-- Include the hashgrid script -->
-<script type="text/javascript" src="hashgrid.js"></script>
+<script src="hashgrid.js"></script>
 
 <!-- Kick hashgrid into action -->
-<script type="text/javascript">
+<script>
 var grid = new hashgrid({ numberOfGrids: 2 });
 </script>
 
