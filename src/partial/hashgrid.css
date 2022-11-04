@@ -1,0 +1,77 @@
+/**
+ * Grid
+ */
+#hashgrid{
+  /*
+   * Spreads the whole page by default
+   * Adjust to match your container
+   */
+  /*width: 100%;*/
+  width: 980px;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -490px;
+  overflow: hidden;
+}
+
+.hashgrid-column-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/**
+ * Vertical grid lines
+ *
+ * Set the column width taking the borders into consideration,
+ * and use margins to set column gutters.
+ */
+.hashgrid__column{
+  width: 139px;
+  border: solid darkturquoise;
+  border-width: 0 1px;
+  margin-left: 19px;
+  height: 100%;
+  float: left;
+}
+
+/**
+ * Horizontal grid lines, defined by your base line height
+ *
+ * Remember, the CSS properties that define the box model:
+ * visible height = height + borders + margins + padding
+ */
+.hashgrid__row{
+  /* 20px line height */
+  height: 19px;
+  border-bottom: 1px dotted darkgray;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Classes for multiple grids
+ *
+ * When using more than one grid, remember to set the numberOfGrids
+ * option when instantiating hashgrid.
+ * e.g.
+ *
+ *  var hg = new Hashgrid({
+ *    numberOfGrids: 2
+ *  });
+ */
+#hashgrid.hashgrid2,
+#hashgrid.hashgrid2 .hashgrid-column-container{
+  /* Container width adjustments */
+  padding: 0 160px;
+  width: 660px;
+}
+
+#hashgrid.hashgrid2 .hashgrid__column{
+  /* Vertical grid line colour for grid 2 */
+  border-color: crimson;
+}
