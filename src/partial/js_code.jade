@@ -1,0 +1,16 @@
+textarea#javascript-code(cols="68" rows="15" readonly="readonly").
+
+  &#60;!-- Include the Hashgrid script --&#62;
+  &#60;script type="text/javascript" src="hashgrid.js"&#62;&#60;/script&#62;
+
+  &#60;!-- Kick Hashgrid into action --&#62;
+  &#60;script type="text/javascript"&#62;
+  var grid = new Hashgrid({ numberOfGrids: 2 });
+  &#60;/script&#62;
+
+  &#60;!-- Note: Use window onload if your css is not inlined --&#62;
+  &#60;script type="text/javascript"&#62;
+  window.addEventListener("load", function(event) {
+    var grid = new Hashgrid({ numberOfGrids: 2 });
+  });
+  &#60;/script&#62;

@@ -16,8 +16,8 @@ Download the latest release from:
 https://github.com/dotjay/hashgrid/tags
 
 Install using [Bower](http://bower.io/):
-```
-bower install hashgrid#v9
+```bash
+bower install hashgrid#v10
 ```
 
 Notes on usage can be found at [dotjay.github.io/hashgrid/#installation](https://dotjay.github.io/hashgrid/#installation).
@@ -29,9 +29,30 @@ The latest version of #grid is maintained on Github, and its official web page i
 
 It is no longer hosted at hashgrid.com, which is now defunct.
 
+## Development ##
+
+Install dependencies
+```bash
+npm install
+```
+
+Run tests
+```bash
+npm test
+```
+
+Build for production
+```bash
+# This will build hashgrid into dist folder
+grunt
+
+# This will build hashgrid and then turn on the watcher for auto building
+grunt dev
+```
+
 ## License ##
 
-Copyright 2013-2018 Jon Gibbins
+Copyright 2013-2022 Jon Gibbins
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
