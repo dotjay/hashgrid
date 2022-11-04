@@ -1,34 +1,54 @@
 /**
- * hashgrid (vanilla version)
- * http://github.com/dotjay/hashgrid
+ * Hashgrid (vanilla version)
+ * https://github.com/dotjay/hashgrid
  * Version 10, 25 Nov 2015
- * Written by Jon Gibbins at Analog, http://analog.coop/
+ * Written by Jon Gibbins, https://dotjay.com/
  *
  * Contibutors:
- * Sean Coates, http://seancoates.com/
- * Phil Dokas, http://jetless.org/
- * Andrew Jaswa, http://andrewjaswa.com/
+ * James Aitken, https://github.com/LoonyPandora
+ * Tom Arnold, https://www.tomarnold.de/
+ * Sean Coates, https://twitter.com/coates
+ * Phil Dokas, https://github.com/pdokas
+ * Andrew Jaswa, https://github.com/ajaswa/
+ * Callum Macrae, https://github.com/callumacrae
+ * Danu Widatama, https://github.com/widatama
+ */
+
+/**
+ * @license Copyright Jon Gibbins
  *
- * License:
- * http://www.apache.org/licenses/LICENSE-2.0.html
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * // Using a basic #grid setup
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Usage
+ *
+ * The basic #grid setup
+ *
  * var grid = new Hashgrid();
  *
- * // Using #grid with a custom id (e.g. #mygrid)
- * var grid = new Hashgrid("mygrid");
+ * But there are a whole bunch of additional options you can set
  *
- * // Using #grid with additional options
- * var grid = new hashgrid({
- *     id: "mygrid",              // id for the grid container
- *     modifierKey: "alt",        // optional "ctrl", "alt" or "shift"
- *     showGridKey: "s",          // key to show the grid
- *     holdGridKey: "enter",      // key to hold the grid shown
- *     foregroundKey: "f",        // key to toggle foreground/background
- *     jumpGridsKey: "d",         // key to cycle through the grids
- *     numberOfGrids: 2,          // number of grids
- *     classPrefix: "mygrid",     // prefix for rows and columns
- *     storagePrefix: "mygrid"    // prefix for storage label
+ * var grid = new Hashgrid({
+ *     id: 'mygrid',            // set a custom id for the grid container
+ *     modifierKey: 'alt',      // optional 'ctrl', 'alt' or 'shift'
+ *     showGridKey: 's',        // key to show the grid
+ *     holdGridKey: 'enter',    // key to hold the grid in place
+ *     foregroundKey: 'f',      // key to toggle foreground/background
+ *     jumpGridsKey: 'd',       // key to cycle through the grid classes
+ *     numberOfGrids: 2,        // number of grid classes used
+ *     classPrefix: 'myclass',  // prefix for the grid classes
+ *     storagePrefix: 'mygrid'  // prefix for storage label
  * });
  */
 
