@@ -13,7 +13,7 @@ A little tool that inserts a layout grid in web pages, allows you to hold it in 
 
 Download the latest release from:
 
-https://github.com/dotjay/hashgrid/releases
+https://github.com/dotjay/hashgrid/tags
 
 Install using [Bower](http://bower.io/):
 ```
