@@ -20,11 +20,14 @@ Install using [Bower](http://bower.io/):
 bower install hashgrid#v9
 ```
 
-Notes on usage can be found at [dotjay.github.io/hashgrid/#installation](http://dotjay.github.io/hashgrid/#installation).
+Notes on usage can be found at [dotjay.github.io/hashgrid/#installation](https://dotjay.github.io/hashgrid/#installation).
 
 ## Please note ##
 
-The latest version of #grid is maintained here, and is no longer hosted at hashgrid.com, which is now defunct.
+The latest version of #grid is maintained on Github, and its official web page is:
+[dotjay.github.io/hashgrid/](https://dotjay.github.io/hashgrid/)
+
+It is no longer hosted at hashgrid.com, which is now defunct.
 
 ## License ##
 
